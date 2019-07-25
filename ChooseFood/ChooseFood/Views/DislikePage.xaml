@@ -10,6 +10,112 @@
     DataContext="{Binding DislikePageViewModel, Source={StaticResource ViewModelLocator}}">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="请问您为什么不喜欢这道菜呢？"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="25"
+                   Margin="-200,0,0,0"/>
+        <Button Background="White" 
+                Grid.Row="1"
+                Name="FirstButton"
+                Height="50"
+                Width="50"
+                Margin="350,0,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE208;"
+                FontSize="25"
+        />
+        <TextBlock Grid.Row="1"
+                   Text="是今天太冷了吗？"
+                   VerticalAlignment="Center"
+                   Margin="550,0,0,0"
+                   FontSize="20"/>
+        <Button Background="White" 
+                Grid.Row="2"
+                Name="SecondButton"
+                Height="50"
+                Width="50"
+                Margin="350,0,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE208;"
+                FontSize="25"
+        />
+        <TextBlock Grid.Row="2"
+                   Text="还是今天太热啦？"
+                   VerticalAlignment="Center"
+                   Margin="550,0,0,0"
+                   FontSize="20"/>
+        <Button Background="White" 
+                Grid.Row="3"
+                Name="ThirdButton"
+                Height="50"
+                Width="50"
+                Margin="350,0,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE208;"
+                FontSize="25"
+        />
+        <TextBlock Grid.Row="3"
+                   Text="今天太潮湿了？"
+                   VerticalAlignment="Center"
+                   Margin="550,0,0,0"
+                   FontSize="20"/>
+        <Button Background="White" 
+                Grid.Row="4"
+                Name="ForthButton"
+                Height="50"
+                Width="50"
+                Margin="350,0,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE208;"
+                FontSize="25"
+        />
+        <TextBlock Grid.Row="4"
+                   Text="还是今天太干了，菜也干巴巴的不喜欢？"
+                   VerticalAlignment="Center"
+                   Margin="550,0,0,0"
+                   FontSize="20"/>
+        <Button Background="White" 
+                Grid.Row="4"
+                Name="FifthButton"
+                Height="50"
+                Width="50"
+                Margin="350,0,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE208;"
+                FontSize="25"
+        />
+        <TextBlock Grid.Row="5"
+                   Text="没有原因，我就是不喜欢"
+                   VerticalAlignment="Center"
+                   Margin="550,0,0,0"
+                   FontSize="20"/>
+        <Button Background="White" 
+                Grid.Row="5"
+                Name="FifButton"
+                Height="50"
+                Width="50"
+                Margin="350,0,0,0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE208;"
+                FontSize="25"
+        />
+        <Button Name="BackButton"
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE0C4;"
+                FontSize="40"
+                Background="White"/>
     </Grid>
 </Page>
