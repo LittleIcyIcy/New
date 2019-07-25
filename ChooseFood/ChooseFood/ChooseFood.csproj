@@ -217,11 +217,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodLibrary\FoodLibrary.csproj">
-      <Project>{a18e29cc-ab24-4768-abbe-aae55ce4dfa8}</Project>
+      <Project>{4f5c04b6-2154-441e-8c36-b771885b739d}</Project>
       <Name>FoodLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
