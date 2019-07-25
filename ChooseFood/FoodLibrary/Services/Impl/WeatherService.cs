@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FoodLibrary.Services.Impl
 {
-    class WeatherService:IWeatherService
+    public class WeatherService:IWeatherService
     {
         private ILocationService _locationService;
         public WeatherService(ILocationService locationService)

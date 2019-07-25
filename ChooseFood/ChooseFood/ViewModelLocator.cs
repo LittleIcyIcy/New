@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChooseFood.Services.Impl;
 using FoodLibrary.Services;
+using FoodLibrary.Services.Impl;
 using FoodLibrary.ViewModels;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -35,7 +36,13 @@ namespace ChooseFood
 
         public ViewModelLocator()
         {
+            SimpleIoc.Default.Register<IUserChoiceService, UserChoiceService>();
+            SimpleIoc.Default.Register<IUserFavorService, UserFavorService>();
+            SimpleIoc.Default.Register<ILocationService, LocationService>();
+            SimpleIoc.Default.Register<IWeatherService, WeatherService>();
+            SimpleIoc.Default.Register<IRecommendationService, RecommendationService>();
             SimpleIoc.Default.Register<ILoadJsonService, LoadJsonService>();
+            SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<MenuPage1ViewModel>();
             SimpleIoc.Default.Register<MenuPage2ViewModel>();

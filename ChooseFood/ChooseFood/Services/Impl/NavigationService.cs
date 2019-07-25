@@ -16,7 +16,7 @@ namespace ChooseFood.Services.Impl
         /// <summary>
         /// 当前页。
         /// </summary>
-        private Type _currentPage;
+        private Type _currentPage = typeof(MainPage);
 
         public void SetFrame(Frame frame)
         {
@@ -27,10 +27,10 @@ namespace ChooseFood.Services.Impl
             new List<(string Tag, Type Page)>
             {
                 ("MainPage",  typeof(MainPage)),
-                ("MenuPage1", typeof(MenuPage1)),
-                ("MenuPage2", typeof(MenuPage2)),
-                ("MenuPage3", typeof(MenuPage3)),
-                ("MenuPage4", typeof(MenuPage4)),
+                ("今日推荐", typeof(MenuPage1)),
+                ("历史记录", typeof(MenuPage2)),
+                ("预览菜单", typeof(MenuPage3)),
+                ("设置", typeof(MenuPage4)),
                 ("LikePage",  typeof(LikePage)),
                 ("DislikePage",typeof(DislikePage))
             };

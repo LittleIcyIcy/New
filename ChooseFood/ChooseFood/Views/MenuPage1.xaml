@@ -10,6 +10,6 @@
     DataContext="{Binding MenuPage1ViewModel, Source={StaticResource ViewModelLocator}}">
 
     <Grid>
-
+        
     </Grid>
 </Page>

@@ -10,6 +10,63 @@
     DataContext="{Binding MainPageViewModel,Source={StaticResource ViewModelLocator}}">
 
     <Grid>
-
+        <NavigationView Name="NavigationView"
+                        IsSettingsVisible="False"
+                        SelectionFollowsFocus="Enabled"
+                        IsBackEnabled="True"
+                        ItemInvoked="NavigationView_OnItemInvoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="今日推荐"
+                                    Tag="MenuPage1"
+                                    Icon="Play"
+                                    FontSize="18"/>
+                <NavigationViewItem Content="历史记录"
+                                    Tag="MenuPage2"
+                                    Icon="CalendarDay"
+                                    FontSize="18"/>
+                <NavigationViewItem Icon="PreView"
+                                    Tag="MenuPage3"
+                                    Content="预览菜单"
+                                    FontSize="18"/>
+                <NavigationViewItem Content="设置"
+                                    Tag="MenuPage4"
+                                    Icon="Setting"
+                                    FontSize="18"/>
+            </NavigationView.MenuItems>
+            <NavigationView.PaneFooter >
+                <RelativePanel>
+                    <PersonPicture x:Name="WeatherPicture"
+                                   MaxHeight="50"
+                                   MaxWidth="50"
+                                   ProfilePicture="Assets/StoreLogo.png" />
+                    <TextBlock Text="{Binding Temperature,Mode=TwoWay}"
+                           MaxHeight="50"
+                           x:Name="Tempratrue"
+                           RelativePanel.RightOf="WeatherPicture"
+                           Margin="10,0,58,-35"
+                           FontSize="20" 
+                           Width="51"/>
+                    <TextBlock Text="{Binding Humidity}"
+                           MaxHeight="50"
+                           Width="51"
+                           x:Name="Humidity"
+                           RelativePanel.RightOf="Tempratrue"
+                           Margin="-40,0,0,-35"
+                           FontSize="20"/>
+                    <TextBlock Text="{Binding Site}"
+                           MaxHeight="50"
+                           Width="51"
+                           RelativePanel.RightOf="Humidity"
+                           Margin="20,0,0,-35"
+                           FontSize="20"/>
+                </RelativePanel>
+            </NavigationView.PaneFooter>
+            <NavigationView.Header>
+                今天吃点啥
+            </NavigationView.Header>
+            <ScrollViewer>
+                <Frame Name="ContentFrame"/>
+            </ScrollViewer>
+        </NavigationView>
     </Grid>
 </Page>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FoodLibrary.Services.Impl
 {
-    class RecommendationService: IRecommendationService
+    public class RecommendationService: IRecommendationService
     {
         private IWeatherService _weatherService;
         private ILoadJsonService _loadJsonService;
