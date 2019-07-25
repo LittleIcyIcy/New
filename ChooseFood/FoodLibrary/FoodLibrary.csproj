@@ -121,7 +121,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Models\FoodChoice.cs" />
     <Compile Include="Models\FoodInformation.cs" />
+    <Compile Include="Models\TempWeather.cs" />
+    <Compile Include="Models\UserFavorInformation.cs" />
+    <Compile Include="Models\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ILoadJsonService.cs" />
     <Compile Include="ViewModels\DislikePageViewModel.cs" />
