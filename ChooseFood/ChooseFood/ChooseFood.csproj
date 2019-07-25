@@ -126,6 +126,8 @@
     <Compile Include="Services\Impl\LoadJsonService.cs" />
     <Compile Include="Services\Impl\LocationService.cs" />
     <Compile Include="Services\Impl\NavigationService.cs" />
+    <Compile Include="Services\Impl\UserChoiceService.cs" />
+    <Compile Include="Services\Impl\UserFavorService.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Views\DislikePage.xaml.cs">
       <DependentUpon>DislikePage.xaml</DependentUpon>
