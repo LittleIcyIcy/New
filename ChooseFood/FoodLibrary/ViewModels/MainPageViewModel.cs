@@ -26,6 +26,11 @@ namespace FoodLibrary.ViewModels
         private WeatherRoot _weatherRootData;
 
         /// <summary>
+        /// 导航服务。
+        /// </summary>
+        private INavigationService _navigationService;
+
+        /// <summary>
         /// 温度。
         /// </summary>
         public string Temperature
@@ -62,10 +67,12 @@ namespace FoodLibrary.ViewModels
 
         public MainPageViewModel(ILocationService locationService,
             IWeatherService weatherService,
-            IRecommendationService recommendationService)
+            IRecommendationService recommendationService,
+            INavigationService navigationService)
         {
             _locationService = locationService;
             _weatherService = weatherService;
+            _navigationService = navigationService;
         }
 
         public Weather WeatherRoot;
@@ -87,18 +94,17 @@ namespace FoodLibrary.ViewModels
 
         private RelayCommand<string> _navigationCommand;
         private RelayCommand<INavigationService> _navigationRelayCommand;
-        private string _page;
 
+        /// <summary>
+        /// 接收点击的页面。
+        /// </summary>
         public RelayCommand<string> NavigationCommand =>
             _navigationCommand ??
             (_navigationCommand =
-                new RelayCommand<string>((s) => { _page = s; }));
+                new RelayCommand<string>((s) =>
+                {
+                    _navigationService.NavigateTo(s);
+                }));
 
-        public RelayCommand <INavigationService> NavigationRelayCommand => 
-            _navigationRelayCommand ?? ((_navigationRelayCommand
-                = new RelayCommand<INavigationService>(
-                    (n) => {
-                        n.NavigateTo(_page);
-                    })));
     }
 }

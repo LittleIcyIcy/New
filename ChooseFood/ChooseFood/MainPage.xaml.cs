@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using ChooseFood.Services.Impl;
 using FoodLibrary.Services;
 using FoodLibrary.ViewModels;
+using GalaSoft.MvvmLight.Ioc;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -29,19 +30,13 @@ namespace ChooseFood
         {
             this.InitializeComponent();
 
-            _navigationService = new NavigationService();
-
-            _navigationService.SetFrame(ContentFrame);
+            SimpleIoc.Default.GetInstance<INavigationService>().SetFrame(ContentFrame);
         }
-
-        private INavigationService _navigationService;
 
         private void NavigationView_OnItemInvoked(NavigationView sender, 
             NavigationViewItemInvokedEventArgs args)
         {
             ((MainPageViewModel)DataContext).NavigationCommand.Execute((string)args.InvokedItem);
-
-            ((MainPageViewModel)DataContext).NavigationRelayCommand.Execute(_navigationService);
         }
     }
 }

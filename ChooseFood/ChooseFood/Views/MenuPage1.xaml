@@ -10,6 +10,68 @@
     DataContext="{Binding MenuPage1ViewModel, Source={StaticResource ViewModelLocator}}">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
+        <Button Name="BackButton"
+                Grid.Row="0"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE0C4;"
+                FontSize="25"
+                Background="White"
+                />
+        <TextBlock Text="今日推荐"
+                   FontSize="18"
+                   Grid.Row="0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <ListView Grid.Row="1"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  ItemsSource="{Binding FoodInformationCollection}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <RelativePanel>
+                        <HyperlinkButton NavigateUri="{Binding Url}"
+                                                 x:Name="NameBlock">
+                            <TextBlock Text="{Binding Name}"/>
+                        </HyperlinkButton>
+                        <TextBlock Text="{Binding FoodElements}"
+                                           x:Name="ElementBlock"
+                                           RelativePanel.RightOf="NameBlock"
+                                           Margin="50,0,0,0">
+                        </TextBlock>
+                        <RelativePanel RelativePanel.RightOf="ElementBlock">
+                            <Button x:Name="zan"
+                                            Width="30"
+                                            Height="30"
+                                            >
+                                <Image Source="sucai/zan.jpg" 
+                                               Margin="-12,-9,-10,-7"/>
+                            </Button>
+                            <Button x:Name="cai"
+                                    Width="30"
+                                    Height="30"
+                                    RelativePanel.RightOf="zan">
+                                <Image Source="sucai/cai.jpg"
+                                               Margin="-12,-9,-10,-7"/>
+                            </Button>
+                        </RelativePanel>
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="2"
+                Background="White"
+                HorizontalAlignment="Center"
+                Width="55"
+                Height="60"
+                FontSize="25"
+                Command="{Binding RecommendationCommand}">
+            <Image Source="sucai/refresh.png" 
+                           Margin="-24,-6,-29,-7"/>
+        </Button>
     </Grid>
 </Page>
