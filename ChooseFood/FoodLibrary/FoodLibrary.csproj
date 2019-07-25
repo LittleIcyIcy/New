@@ -124,7 +124,13 @@
     <Compile Include="Models\FoodInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ILoadJsonService.cs" />
+    <Compile Include="ViewModels\DislikePageViewModel.cs" />
+    <Compile Include="ViewModels\LikePageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\MenuPage1ViewModel.cs" />
+    <Compile Include="ViewModels\MenuPage2ViewModel.cs" />
+    <Compile Include="ViewModels\MenuPage3ViewModel.cs" />
+    <Compile Include="ViewModels\MenuPage4ViewModel.cs" />
     <EmbeddedResource Include="Properties\FoodLibrary.rd.xml" />
   </ItemGroup>
   <ItemGroup>
