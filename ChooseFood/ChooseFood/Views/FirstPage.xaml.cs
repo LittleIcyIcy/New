@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using FoodLibrary.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -21,16 +20,11 @@ namespace ChooseFood.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class MenuPage3 : Page
+    public sealed partial class FirstPage : Page
     {
-        public MenuPage3()
+        public FirstPage()
         {
             this.InitializeComponent();
-        }
-
-        private void MenuPage3_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ((MenuPage3ViewModel)DataContext).GetCommand.Execute(null);
         }
     }
 }

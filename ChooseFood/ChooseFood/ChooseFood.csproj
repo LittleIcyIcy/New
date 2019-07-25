@@ -132,6 +132,9 @@
     <Compile Include="Views\DislikePage.xaml.cs">
       <DependentUpon>DislikePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FirstPage.xaml.cs">
+      <DependentUpon>FirstPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LikePage.xaml.cs">
       <DependentUpon>LikePage.xaml</DependentUpon>
     </Compile>
@@ -152,10 +155,11 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Assets\test_data.json" />
+    <Content Include="Assets\test_data.json" />
     <None Include="ChooseFood_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\sucai\refresh.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -175,6 +179,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DislikePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirstPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

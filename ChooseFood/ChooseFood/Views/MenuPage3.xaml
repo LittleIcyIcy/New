@@ -7,9 +7,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    DataContext="{Binding MenuPage3ViewModel, Source={StaticResource ViewModelLocator}}">
+    DataContext="{Binding MenuPage3ViewModel, Source={StaticResource ViewModelLocator}}"
+    Loaded="MenuPage3_OnLoaded">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="菜单"
+                   FontSize ="30"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding AllFoodInformationsCollection}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Width="900">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <RelativePanel>
+                        <HyperlinkButton NavigateUri="{Binding Url}"
+                                         x:Name="NameBlock">
+                            <TextBlock Text="{Binding Name}"/>
+                        </HyperlinkButton>
+                        <TextBlock Text="{Binding FoodElements}"
+                                   RelativePanel.RightOf="NameBlock"
+                                   Margin="15,0,0,0"/>
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

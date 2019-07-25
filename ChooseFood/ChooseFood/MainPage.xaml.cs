@@ -38,5 +38,10 @@ namespace ChooseFood
         {
             ((MainPageViewModel)DataContext).NavigationCommand.Execute((string)args.InvokedItem);
         }
+
+        private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ((MainPageViewModel) DataContext).RefreshCommand.Execute(null);
+        }
     }
 }

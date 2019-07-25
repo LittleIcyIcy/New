@@ -65,5 +65,6 @@ namespace FoodLibrary.ViewModels
                 _navigationService.NavigateTo("DislikePage");
             }));
         private RelayCommand _caiCommand;
+
     }
 }
