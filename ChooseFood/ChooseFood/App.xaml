@@ -1,0 +1,11 @@
+﻿<Application
+    x:Class="ChooseFood.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ChooseFood"
+    xmlns:vm="using:ChooseFood">
+
+    <Application.Resources>
+        <vm:ViewModelLocator x:Key="ViewModelLocator"/>
+    </Application.Resources>
+</Application>
