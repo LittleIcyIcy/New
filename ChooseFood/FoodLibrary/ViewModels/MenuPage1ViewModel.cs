@@ -83,5 +83,61 @@ namespace FoodLibrary.ViewModels
 
 
 
+
+
+
+
+
+        public class FilterViewModel :ViewModelBase
+        {
+            /// <summary>
+            /// 父ViewModel
+            /// </summary>
+            private MenuPage1ViewModel _menuPage1ViewModel;
+
+            private INavigationService _navigationService;
+
+            private FoodInformation _foodInformation;
+            //还应该有个颜色的成员变量
+
+            /// <summary>
+            /// 构造函数
+            /// </summary>
+            /// <param name="menuPage1ViewModel"></param>
+            public FilterViewModel(MenuPage1ViewModel menuPage1ViewModel,
+                INavigationService navigationService)
+            {
+                _menuPage1ViewModel = menuPage1ViewModel;
+                _navigationService = navigationService;
+            }
+
+            public FoodInformation FoodInformation
+            {
+                get => _foodInformation;
+                set =>
+                    Set(nameof(FoodInformation), ref _foodInformation, value);
+            }
+
+            private int flag_zan = 0;
+            private int flag_cai = 0;
+
+            /// <summary>
+            /// 点赞的命令绑定。
+            /// </summary>
+            private RelayCommand _zanCommand;
+
+            public RelayCommand ZanCommand =>
+                _zanCommand ?? (_zanCommand = 
+                    new RelayCommand(() => 
+                    {
+                        if (flag_zan == 1)//连续点击两下会取消
+                        {
+                            flag_zan = 0;
+                            //把原来的原因给取消了
+                        }
+                        
+                    }));
+        }
+
     }
 }
