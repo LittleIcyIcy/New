@@ -34,6 +34,7 @@ namespace FoodLibrary.ViewModels
             _navigationService = navigationService;
         }
 
+
         /// <summary>
         /// 刷新按钮的绑定。
         /// </summary>
@@ -42,14 +43,22 @@ namespace FoodLibrary.ViewModels
                 = new RelayCommand(async () =>
                 {
                     FoodInformationCollection.Clear();
-                    FoodInformationCollection.AddRange(await _recommendationService.ReFlashAsync());
+                    _foodInformationCollection.AddRange(await _recommendationService.ReFlashAsync());
+                    FoodInformationCollection = _foodInformationCollection;
                 }));
         private RelayCommand _recommendationCommand;
 
         /// <summary>
         /// 所推荐的菜品的名称列表。
         /// </summary>
-        public ObservableRangeCollection<FoodInformation> FoodInformationCollection { get; } =
+        public ObservableRangeCollection<FoodInformation> FoodInformationCollection
+        {
+            get;
+            set;
+        } =
+            new ObservableRangeCollection<FoodInformation>();
+
+        private ObservableRangeCollection<FoodInformation> _foodInformationCollection =
             new ObservableRangeCollection<FoodInformation>();
 
         /// <summary>
