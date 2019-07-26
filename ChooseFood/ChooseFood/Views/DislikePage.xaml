@@ -109,13 +109,14 @@
                 Content="&#xE208;"
                 FontSize="25"
         />
-        <Button Name="BackButton"
-                Grid.Row="0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
+        <Button Name="ConfirmButton"
+                Grid.Row="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
                 FontFamily="Segoe MDL2 Assets"
-                Content="&#xE0C4;"
-                FontSize="40"
+                Content="&#xE001;"
+                FontSize="50"
+                Margin="0,0,150,0"
                 Background="White"/>
     </Grid>
 </Page>

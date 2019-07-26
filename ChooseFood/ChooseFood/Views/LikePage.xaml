@@ -95,16 +95,18 @@
                    VerticalAlignment="Center"
                    Margin="550,0,0,0"
                    FontSize="20"/>
-        <Button Grid.Row="0"
+        <Button Grid.Row="5"
                 Background="White"
                 FontFamily="Segoe MDL2 Assets"
-                Content="&#xE0C4;"
-                FontSize="40"
-                x:Name="Back"
+                Content="&#xE001;"
+                FontSize="50"
+                x:Name="Confirm"
                 Width="80"
                 Height="60"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Margin="0,0,150,0"
+
                 />
     </Grid>
 </Page>

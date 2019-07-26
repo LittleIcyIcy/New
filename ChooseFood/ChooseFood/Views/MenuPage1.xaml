@@ -38,18 +38,18 @@
                         </TextBlock>
                         <RelativePanel RelativePanel.RightOf="ElementBlock">
                             <Button x:Name="zan"
-                                            Width="30"
-                                            Height="30"
-                                            >
-                                <Image Source="sucai/zan.jpg" 
-                                               Margin="-12,-9,-10,-7"/>
+                                    Width="30"
+                                    Height="30"
+                                    FontFamily="Segeo MDL2 Aseets"
+                                    Content="&#xE006;"
+                                    Command="{Binding Z}">
                             </Button>
                             <Button x:Name="cai"
                                     Width="30"
                                     Height="30"
+                                    FontFamily="Segeo MDL2 Aseets"
+                                    Content="&#xE00C;"
                                     RelativePanel.RightOf="zan">
-                                <Image Source="sucai/cai.jpg"
-                                               Margin="-12,-9,-10,-7"/>
                             </Button>
                         </RelativePanel>
                     </RelativePanel>
