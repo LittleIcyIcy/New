@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using FoodLibrary.Models;
 using FoodLibrary.Services;
@@ -17,6 +18,11 @@ namespace FoodLibrary.ViewModels
         private IRecommendationService _recommendationService;
 
         /// <summary>
+        /// 用于标志，同一道菜不能既赞又踩。
+        /// </summary>
+        private int[] flag = {0,0,0,0,0};
+
+        /// <summary>
         /// 页面导航服务。
         /// </summary>
         private INavigationService _navigationService;
@@ -28,6 +34,7 @@ namespace FoodLibrary.ViewModels
             _navigationService = navigationService;
         }
 
+
         /// <summary>
         /// 刷新按钮的绑定。
         /// </summary>
@@ -36,35 +43,54 @@ namespace FoodLibrary.ViewModels
                 = new RelayCommand(async () =>
                 {
                     FoodInformationCollection.Clear();
-                    FoodInformationCollection.AddRange(await _recommendationService.ReFlashAsync());
+                    _foodInformationCollection.AddRange(await _recommendationService.ReFlashAsync());
+                    FoodInformationCollection = _foodInformationCollection;
                 }));
         private RelayCommand _recommendationCommand;
 
         /// <summary>
         /// 所推荐的菜品的名称列表。
         /// </summary>
-        public ObservableRangeCollection<FoodInformation> FoodInformationCollection { get; } =
+        public ObservableRangeCollection<FoodInformation> FoodInformationCollection
+        {
+            get;
+            set;
+        } =
+            new ObservableRangeCollection<FoodInformation>();
+
+        private ObservableRangeCollection<FoodInformation> _foodInformationCollection =
             new ObservableRangeCollection<FoodInformation>();
 
         /// <summary>
-        /// 点赞按钮。
+        /// 第一个点赞按钮。
         /// </summary>
-        public RelayCommand ZanCommand =>
-            _zanCommand ?? (_zanCommand = new RelayCommand(() =>
+        public RelayCommand ZanCommand1 =>
+            _zanCommand1 ?? (_zanCommand1 = new RelayCommand(() =>
             {
-                _navigationService.NavigateTo("LikePage");
+                if (flag[0] == 0)
+                {
+                    _navigationService.NavigateTo("LikePage");
+                    flag[0] = 1;
+                }
             }));
-        private RelayCommand _zanCommand;
+        private RelayCommand _zanCommand1;
 
         /// <summary>
-        /// 踩的按钮。
+        /// 第一个踩的按钮。
         /// </summary>
-        public RelayCommand CaiCommand =>
-            _caiCommand ?? (_caiCommand = new RelayCommand(() => 
+        public RelayCommand CaiCommand1 =>
+            _caiCommand1 ?? (_caiCommand1 = new RelayCommand(() =>
             {
-                _navigationService.NavigateTo("DislikePage");
+                if (flag[0] == 0)
+                {
+                    _navigationService.NavigateTo("DislikePage");
+                    flag[0] = 2;
+                }
+
             }));
-        private RelayCommand _caiCommand;
+        private RelayCommand _caiCommand1;
+
+
 
     }
 }

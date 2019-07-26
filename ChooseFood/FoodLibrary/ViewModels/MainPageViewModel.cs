@@ -93,7 +93,6 @@ namespace FoodLibrary.ViewModels
 
 
         private RelayCommand<string> _navigationCommand;
-        private RelayCommand<INavigationService> _navigationRelayCommand;
 
         /// <summary>
         /// 接收点击的页面。

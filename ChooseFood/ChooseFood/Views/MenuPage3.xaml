@@ -35,7 +35,9 @@
                         </HyperlinkButton>
                         <TextBlock Text="{Binding FoodElements}"
                                    RelativePanel.RightOf="NameBlock"
-                                   Margin="15,0,0,0"/>
+                                   Margin="15,7,0,0"
+                                   VerticalAlignment="Center"
+                                   />
                     </RelativePanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

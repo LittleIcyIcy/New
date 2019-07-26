@@ -9,7 +9,7 @@ using FoodLibrary.Services;
 
 namespace ChooseFood.Services.Impl
 {
-    class NavigationService:INavigationService
+    public class NavigationService:INavigationService
     {
         private Frame _frame;
 
