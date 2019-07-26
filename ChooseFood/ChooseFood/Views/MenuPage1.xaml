@@ -42,7 +42,7 @@
                                     Height="30"
                                     FontFamily="Segeo MDL2 Aseets"
                                     Content="&#xE006;"
-                                    Command="{Binding Z}">
+                                    Command="{Binding}">
                             </Button>
                             <Button x:Name="cai"
                                     Width="30"
