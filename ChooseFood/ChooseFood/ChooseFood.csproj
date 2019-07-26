@@ -156,6 +156,8 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\test_data.json" />
+    <Content Include="Views\sucai\cai.jpg" />
+    <Content Include="Views\sucai\zan.jpg" />
     <None Include="ChooseFood_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
