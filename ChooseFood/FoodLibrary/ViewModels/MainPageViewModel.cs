@@ -19,7 +19,10 @@ namespace FoodLibrary.ViewModels
         /// </summary>
         private IWeatherService _weatherService;
 
-
+        /// <summary>
+        /// 推荐服务。
+        /// </summary>
+        private IRecommendationService _recommendationService;
         /// <summary>
         /// 所有的天气数据。
         /// </summary>
@@ -73,6 +76,7 @@ namespace FoodLibrary.ViewModels
             _locationService = locationService;
             _weatherService = weatherService;
             _navigationService = navigationService;
+            _recommendationService = recommendationService;
         }
 
         public Weather WeatherRoot;
@@ -103,6 +107,18 @@ namespace FoodLibrary.ViewModels
                 new RelayCommand<string>((s) =>
                 {
                     _navigationService.NavigateTo(s);
+                }));
+
+
+        /// <summary>
+        /// 初始化本程序。
+        /// </summary>
+        private RelayCommand _initAllIformationCommand;
+        public RelayCommand InitAllInformationCommand =>
+            _initAllIformationCommand ?? (_initAllIformationCommand =
+                new RelayCommand(() => 
+                {
+                    _recommendationService.InitRecommendationAsync();
                 }));
 
     }

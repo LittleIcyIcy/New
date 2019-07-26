@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    DataContext="{Binding MainPageViewModel,Source={StaticResource ViewModelLocator}}">
+    DataContext="{Binding MainPageViewModel,Source={StaticResource ViewModelLocator}}"
+    Loaded="MainPage_OnLoaded">
 
     <Grid>
         <NavigationView Name="NavigationView"
