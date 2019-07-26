@@ -30,7 +30,7 @@ namespace ChooseFood
         {
             this.InitializeComponent();
 
-            SimpleIoc.Default.GetInstance<INavigationService>().SetFrame(ContentFrame);
+            ((NavigationService)SimpleIoc.Default.GetInstance<INavigationService>()).SetFrame(ContentFrame);
         }
 
         private void NavigationView_OnItemInvoked(NavigationView sender, 

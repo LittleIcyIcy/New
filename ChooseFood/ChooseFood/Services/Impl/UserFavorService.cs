@@ -16,9 +16,9 @@ namespace ChooseFood.Services.Impl
         /// 用于加载用户倾向的json文件
         /// </summary>
         /// <returns></returns>
-        public async Task<List<UserFavorInformation>> ReadJsonAsync()
+        public async Task<List<FoodWeightChange>> ReadJsonAsync()
         {
-            List<UserFavorInformation> userChoiceInformation = new List<UserFavorInformation>();
+            List<FoodWeightChange> userChoiceInformation = new List<FoodWeightChange>();
             await Task.Run(async () =>
             {
                 Windows.Storage.StorageFolder storageFolder =
@@ -29,7 +29,7 @@ namespace ChooseFood.Services.Impl
 
                     String text = await Windows.Storage.FileIO.ReadTextAsync(sampleFile);
 
-                    userChoiceInformation = JsonMapper.ToObject<List<UserFavorInformation>>(text);
+                    userChoiceInformation = JsonMapper.ToObject<List<FoodWeightChange>>(text);
                 }
                 catch (Exception ex)
                 {
@@ -44,7 +44,7 @@ namespace ChooseFood.Services.Impl
         /// 保存用户的倾向性json
         /// </summary>
         /// <param name="userChoiceInformation"></param>
-        public async void SaveJsonAsync(List<UserFavorInformation> userChoiceInformation)
+        public async void SaveJsonAsync(List<FoodWeightChange> userChoiceInformation)
         {
             String json = JsonConvert.SerializeObject(userChoiceInformation.ToArray());
             try

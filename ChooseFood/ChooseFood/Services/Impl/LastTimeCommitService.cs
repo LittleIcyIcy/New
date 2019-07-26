@@ -3,54 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FoodLibrary.Models;
 using FoodLibrary.Services;
 using LitJson;
 using Newtonsoft.Json;
 
 namespace ChooseFood.Services.Impl
 {
-    class UserChoiceService:IUserChoiceService
+    class LastTimeCommitService : ILastTimeCommitService
     {
-        /// <summary>
-        /// 读取user_choice文件
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<Log>> ReadJsonAsync()
+        public async Task<DateTime> ReadJsonAsync()
         {
-            List<Log> user_choice = new List<Log>();
+            DateTime dateTime = new DateTime();
             await Task.Run(async () =>
             {
                 Windows.Storage.StorageFolder storageFolder =
                     Windows.Storage.ApplicationData.Current.LocalFolder;
                 try
                 {
-                    Windows.Storage.StorageFile sampleFile = await storageFolder.GetFileAsync("user_choice.json");
+                    Windows.Storage.StorageFile sampleFile = await storageFolder.GetFileAsync("lasttimecommit.json");
 
                     String text = await Windows.Storage.FileIO.ReadTextAsync(sampleFile);
 
-                    user_choice = JsonMapper.ToObject<List<Log>>(text);
+                    dateTime = JsonMapper.ToObject<DateTime>(text);
                 }
                 catch (Exception ex)
                 {
 
                 }
             });
-            return user_choice;
+            return dateTime;
         }
         /// <summary>
         /// 保存用户选择过的菜品信息
         /// </summary>
         /// <param name="userChoice"></param>
-        public async void SaveJsonAsync(List<Log> userChoice)
+        public async void SaveJsonAsync(DateTime lastDateTime)
         {
-            String json = JsonConvert.SerializeObject(userChoice.ToArray());
+            String json = JsonConvert.SerializeObject(lastDateTime);
             try
             {
                 Windows.Storage.StorageFolder storageFolder =
                     Windows.Storage.ApplicationData.Current.LocalFolder;
                 Windows.Storage.StorageFile writeFile =
-                    await storageFolder.CreateFileAsync("user_choice.json",
+                    await storageFolder.CreateFileAsync("lasttimecommit.json",
                         Windows.Storage.CreationCollisionOption.ReplaceExisting);
                 await Windows.Storage.FileIO.WriteTextAsync(writeFile, json);
             }

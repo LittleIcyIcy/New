@@ -8,8 +8,8 @@ namespace FoodLibrary.Services
 {
     public interface IUserFavorService
     {
-        Task<List<UserFavorInformation>> ReadJsonAsync();
+        Task<List<FoodWeightChange>> ReadJsonAsync();
 
-        void SaveJsonAsync(List<UserFavorInformation> userChoiceInformation);
+        void SaveJsonAsync(List<FoodWeightChange> userChoiceInformation);
     }
 }

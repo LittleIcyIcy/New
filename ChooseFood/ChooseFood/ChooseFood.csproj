@@ -123,6 +123,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Impl\LastTimeCommitService.cs" />
     <Compile Include="Services\Impl\LoadJsonService.cs" />
     <Compile Include="Services\Impl\LocationService.cs" />
     <Compile Include="Services\Impl\NavigationService.cs" />

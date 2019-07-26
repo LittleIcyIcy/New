@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace FoodLibrary.Services
 {
-    public interface IUserChoiceService
+    public interface ILogService
     {
-        Task<List<Log>> ReadJsonAsync();
+        Task InitAsync();
+        void AddLog(Log addLog);
 
-        void SaveJsonAsync(List<Log> userChoice);
+        void SaveLogAsync();
     }
 }

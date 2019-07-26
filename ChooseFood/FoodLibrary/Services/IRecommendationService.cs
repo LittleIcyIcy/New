@@ -9,19 +9,15 @@ namespace FoodLibrary.Services
     public interface IRecommendationService
     {
         Task<List<FoodInformation>> ReFlashAsync();
-        List<FoodChoice> GetFoodChoices();
+        void InitRecommendationAsync();
         List<int> GetCos(List<Vector> foodVector);
 
         List<Vector> getFoodVector(int temperature, int humidity);
 
-        void InitWeight(List<FoodInformation> food_infs, List<UserFavorInformation> userfavor);
+        void InitWeight(List<FoodInformation> food_infs, List<FoodWeightChange> userfavor);
 
         int GetOneFoodNum(List<int> cos);
         List<FoodInformation> GetFoodInfs();
         void ChangeWeight(String food_name, List<int> reason, bool IsWriteToJson);
-
-        void AddUserChoice(String userchoice);
-        void SaveUserFavor();
-        void SaveUserChoice();
     }
 }

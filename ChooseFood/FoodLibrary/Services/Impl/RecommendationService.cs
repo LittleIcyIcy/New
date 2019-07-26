@@ -9,35 +9,41 @@ namespace FoodLibrary.Services.Impl
     {
         private IWeatherService _weatherService;
         private ILoadJsonService _loadJsonService;
-        //private ISaveJsonService _saveJsonService;
         private IUserFavorService _userFavorService;
         private IUserChoiceService _userChoiceService;
-
-        private List<UserFavorInformation> userFavorInformationList;
-        private List<FoodChoice> userChoiceList;
+        private ILogService _logService;
+        private IFoodFavorService _foodFavorService;
+        private List<FoodWeightChange> userFavorInformationList;
         private List<FoodInformation> foodInformationList;
-
         private TempWeather weatherStatus;
 
         public RecommendationService(IWeatherService weatherService, ILoadJsonService loadJsonService
-            , IUserChoiceService userChoiceService, IUserFavorService userFavorService)
+            , IUserFavorService userFavorService,ILogService logService, IFoodFavorService foodFavorService)
         {
             _weatherService = weatherService;
             _loadJsonService = loadJsonService;
-            //_saveJsonService = saveJsonService;
             _userFavorService = userFavorService;
-            _userChoiceService = userChoiceService;
+            _logService = logService;
+            _logService.InitAsync();
+            _foodFavorService = foodFavorService;
+            _foodFavorService.InitAsync();
         }
 
-        public List<FoodChoice> GetFoodChoices()
+
+        /// <summary>
+        /// 初始化信息
+        /// </summary>
+        public async void InitRecommendationAsync()
         {
-            FoodChoice tempFoodChoice = new FoodChoice();
-            tempFoodChoice.Date = DateTime.Today;
-            tempFoodChoice.FoodName = "沙琪玛";
-            userChoiceList.Add(tempFoodChoice);
-            return userChoiceList;
+            userFavorInformationList = new List<FoodWeightChange>();
+            foodInformationList = await _loadJsonService.ReadJsonAsync();
+            userFavorInformationList = await _userFavorService.ReadJsonAsync();
+            InitWeight(foodInformationList, userFavorInformationList);
+            WeatherRoot data = await _weatherService.GetWeatherAsync();
+            weatherStatus = new TempWeather();
+            weatherStatus.Temperature = double.Parse(data.main.temp).ToTemperature();
+            weatherStatus.Humidity = double.Parse(data.main.humidity).ToHumidity();
         }
-
         /// <summary>
         /// 通过当前的菜品状态进行推荐。
         /// </summary>
@@ -47,14 +53,12 @@ namespace FoodLibrary.Services.Impl
             // 如果没录入了文件
             if (foodInformationList == null)
             {
-                userFavorInformationList = new List<UserFavorInformation>();
+                userFavorInformationList = new List<FoodWeightChange>();
                 foodInformationList = await _loadJsonService.ReadJsonAsync();
-
                 userFavorInformationList = await _userFavorService.ReadJsonAsync();
-                userChoiceList = await _userChoiceService.ReadJsonAsync();
+                //userChoiceList = await _userChoiceService.ReadJsonAsync();
                 InitWeight(foodInformationList, userFavorInformationList);
             }
-
             //获得食物的种数
             //int len = foodInformationList.Capacity;
             if (weatherStatus == null)
@@ -138,12 +142,12 @@ namespace FoodLibrary.Services.Impl
         /// </summary>
         /// <param name="food_infs"></param>
         /// <param name="userfavor"></param>
-        public void InitWeight(List<FoodInformation> food_infs, List<UserFavorInformation> userfavor)
+        public void InitWeight(List<FoodInformation> food_infs, List<FoodWeightChange> userfavor)
         {
             for (int i = 0; i < userfavor.Count; i++)
             {
-                String food_name = userfavor[i].Name;
-                ChangeWeight(food_name, userfavor[i].reason, false);
+                String food_name = userfavor[i].FoodName;
+                ChangeWeight(food_name, userfavor[i].weightChangeList, false);
             }
             return;
         }
@@ -214,36 +218,36 @@ namespace FoodLibrary.Services.Impl
             // reason 3 干
             // reason 4 正常
             // reason 5 温
-            // reason 6 没有原因
-            // reason 7 喜欢
+
             int pos = FindNameIndex(food_name);
-            if (reason[7] == 1)
+            for (int i = 0; i < reason.Count; i++)
             {
-                for (int i = 0; i < foodInformationList[pos].Weight.Count - 2; i++)
+                if(reason[i] > 0 )
                 {
-                    if (reason[i] == 1)
-                    {
-                        foodInformationList[pos].Weight[i] = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * 4 / 3)));
-                    }
+                    foodInformationList[pos].Weight[i] =
+                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (4 / 3)^reason[i])));
+                }
+                else if(reason[i] < 0)
+                {
+                    foodInformationList[pos].Weight[i] = 
+                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[reason[i]] * (3 / 4)^(Math.Abs(reason[i])))));
 
                 }
+                
             }
-            else if (reason[6] == 1)
-            {
-                for (int i = 1; i < foodInformationList[pos].Weight.Count - 2; i++)
-                {
-                    if (reason[i] == 1)
-                    {
-                        foodInformationList[pos].Weight[i] = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[reason[i]] * 4 / 3)));
-                    }
-                }
-            }
+
             if (IsWriteToJson)
             {
-                UserFavorInformation favor = new UserFavorInformation();
-                favor.Name = food_name;
-                favor.reason = reason;
-                AddUserFavor(favor);
+                Log log = new Log();
+                log.FoodName = food_name;
+                log.Date = DateTime.Now;
+                log.WeatherList = new List<int>(2);
+                log.WeatherList[0] = Int32.Parse(weatherStatus.Temperature.ToString());
+                log.WeatherList[1] = Int32.Parse(weatherStatus.Humidity.ToString());
+                log.WeightChangeList = reason;
+                _logService.AddLog(log);
+                _foodFavorService.ChangeWeight(pos,reason);
+
             }
         }
         /// <summary>
@@ -263,43 +267,6 @@ namespace FoodLibrary.Services.Impl
                 }
             }
             return -1;
-        }
-        /// <summary>
-        /// 添加一条用户的倾向信息
-        /// </summary>
-        /// <param name="userfavor"></param>
-        public void AddUserFavor(UserFavorInformation userfavor)
-        {
-            userFavorInformationList.Add(userfavor);
-            return;
-        }
-        /// <summary>
-        /// 添加一条用户的选择食物信息
-        /// </summary>
-        /// <param name="userchoice"></param>
-        public void AddUserChoice(String userchoice)
-        {
-            FoodChoice foodChoice = new FoodChoice();
-            foodChoice.FoodName = userchoice;
-            foodChoice.Date = DateTime.Now;
-            userChoiceList.Add(foodChoice);
-            return;
-        }
-        /// <summary>
-        /// 保存用户的倾向信息
-        /// </summary>
-        public void SaveUserFavor()
-        {
-            _userFavorService.SaveJsonAsync(userFavorInformationList);
-            return;
-        }
-        /// <summary>
-        /// 保存用户选择过的信息
-        /// </summary>
-        public void SaveUserChoice()
-        {
-            _userChoiceService.SaveJsonAsync(userChoiceList);
-            return;
         }
     }
 }
