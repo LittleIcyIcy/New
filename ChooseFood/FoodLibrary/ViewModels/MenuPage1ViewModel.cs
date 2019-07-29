@@ -18,11 +18,6 @@ namespace FoodLibrary.ViewModels
         private IRecommendationService _recommendationService;
 
         /// <summary>
-        /// 用于标志，同一道菜不能既赞又踩。
-        /// </summary>
-        private int[] flag = {0,0,0,0,0};
-
-        /// <summary>
         /// 页面导航服务。
         /// </summary>
         private INavigationService _navigationService;
@@ -42,54 +37,23 @@ namespace FoodLibrary.ViewModels
             _recommendationCommand ?? (_recommendationCommand
                 = new RelayCommand(async () =>
                 {
-                    FoodInformationCollection.Clear();
+                    _foodInformationCollection.Clear();
                     _foodInformationCollection.AddRange(await _recommendationService.ReFlashAsync());
-                    FoodInformationCollection = _foodInformationCollection;
                 }));
         private RelayCommand _recommendationCommand;
 
         /// <summary>
-        /// 所推荐的菜品的名称列表。
+        /// 所推荐的菜品的小ViewModel列表。
         /// </summary>
-        public ObservableRangeCollection<FoodInformation> FoodInformationCollection
+        public ObservableRangeCollection<FilterViewModel> FoodInformationCollection
         {
             get;
             set;
         } =
-            new ObservableRangeCollection<FoodInformation>();
+            new ObservableRangeCollection<FilterViewModel>();
 
         private ObservableRangeCollection<FoodInformation> _foodInformationCollection =
             new ObservableRangeCollection<FoodInformation>();
-
-        /// <summary>
-        /// 第一个点赞按钮。
-        /// </summary>
-        public RelayCommand ZanCommand1 =>
-            _zanCommand1 ?? (_zanCommand1 = new RelayCommand(() =>
-            {
-                if (flag[0] == 0)
-                {
-                    _navigationService.NavigateTo("LikePage");
-                    flag[0] = 1;
-                }
-            }));
-        private RelayCommand _zanCommand1;
-
-        /// <summary>
-        /// 第一个踩的按钮。
-        /// </summary>
-        public RelayCommand CaiCommand1 =>
-            _caiCommand1 ?? (_caiCommand1 = new RelayCommand(() =>
-            {
-                if (flag[0] == 0)
-                {
-                    _navigationService.NavigateTo("DislikePage");
-                    flag[0] = 2;
-                }
-
-            }));
-        private RelayCommand _caiCommand1;
-
 
 
     }
