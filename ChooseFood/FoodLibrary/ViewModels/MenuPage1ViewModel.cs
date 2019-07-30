@@ -23,11 +23,30 @@ namespace FoodLibrary.ViewModels
         /// </summary>
         private INavigationService _navigationService;
 
+        /// <summary>
+        /// 接收随机生成的推荐菜单
+        /// </summary>
+        private List<FoodInformation> _foodInformations = new List<FoodInformation>();
+
+        private int flag = 0;
+
         public MenuPage1ViewModel(IRecommendationService recommendationService
             , INavigationService navigationService)
         {
             _recommendationService = recommendationService;
             _navigationService = navigationService;
+        }
+
+        public async System.Threading.Tasks.Task ShowAsync()
+        {
+            if (flag == 0) {
+                _foodInformations = await _recommendationService.ReFlashAsync();
+                exchange(_foodInformations);
+                flag = 1;
+            }
+            else {
+                return;
+            }
         }
 
         /// <summary>
@@ -47,11 +66,6 @@ namespace FoodLibrary.ViewModels
         /// </summary>
         public ObservableRangeCollection<FilterViewModel> FoodInformationCollection { get; } =
             new ObservableRangeCollection<FilterViewModel>();
-
-        /// <summary>
-        /// 接收随机生成的推荐菜单
-        /// </summary>
-        private List<FoodInformation> _foodInformations = new List<FoodInformation>();
 
         /// <summary>
         /// 将FoodInformation包装成FilterViewModel

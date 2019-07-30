@@ -33,7 +33,7 @@
                 FontFamily="Segoe MDL2 Assets"
                 Content="&#xE208;"
                 FontSize="20"
-        />
+                Command="{Binding FifthCommand}"/>
         <TextBlock Grid.Row="1"
                    Text="是今天太冷了,这道菜让您觉得温暖嘛？"
                    VerticalAlignment="Center"
@@ -47,7 +47,8 @@
                 Margin="150,0,0,0"
                 FontFamily="Segoe MDL2 Assets"
                 Content="&#xE208;"
-                FontSize="20"/>
+                FontSize="20"
+                Command="{Binding SecondCommand}"/>
         <TextBlock Grid.Row="2"
                    Text="还是今天太热啦，这道菜让您觉得清热解暑呢？"
                    VerticalAlignment="Center"
@@ -61,7 +62,8 @@
                 Margin="150,0,0,0"
                 FontFamily="Segoe MDL2 Assets"
                 Content="&#xE208;"
-                FontSize="20"/>
+                FontSize="20"
+                Command="{Binding ThirdCommand}"/>
         <TextBlock Grid.Row="3"
                    Text="今天太潮湿了，这道菜让您觉得很舒适？"
                    VerticalAlignment="Center"
@@ -75,7 +77,8 @@
                 Margin="150,0,0,0"
                 FontFamily="Segoe MDL2 Assets"
                 Content="&#xE208;"
-                FontSize="20"/>
+                FontSize="20"
+                Command="{Binding ForthCommand}"/>
         <TextBlock Grid.Row="4"
                    Text="还是今天太干了，这道菜让您觉得很舒适呢？"
                    VerticalAlignment="Center"
@@ -89,7 +92,8 @@
                 Margin="150,0,0,0"
                 FontFamily="Segoe MDL2 Assets"
                 Content="&#xE208;"
-                FontSize="20"/>
+                FontSize="20"
+                Command="{Binding FifthCommand}"/>
         <TextBlock Grid.Row="5"
                    Text="没有原因，我就是喜欢"
                    VerticalAlignment="Center"
