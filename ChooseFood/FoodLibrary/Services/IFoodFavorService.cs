@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FoodLibrary.Models;
 
 namespace FoodLibrary.Services
 {
@@ -10,5 +11,6 @@ namespace FoodLibrary.Services
         void ChangeWeight(int pos, List<int> changeWeight);
         void SaveChangeWeightAsync();
 
+        List<FoodWeightChange> GetFoodWeightChanges();
     }
 }

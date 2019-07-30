@@ -12,5 +12,8 @@ namespace FoodLibrary.Services
         void AddLog(Log addLog);
 
         void SaveLogAsync();
+        List<Log> GetLogs();
+
+        void SetLogs(List<Log> logs);
     }
 }

@@ -35,5 +35,15 @@ namespace FoodLibrary.Services.Impl
             _userFavorService.SaveJsonAsync(FoodWeightChangesList);
         }
 
+        public List<FoodWeightChange> GetFoodWeightChanges()
+        {
+            return FoodWeightChangesList;
+        }
+
+        public void SetFoodWeightChanges(List<FoodWeightChange> foodWeightChanges)
+        {
+            FoodWeightChangesList = foodWeightChanges;
+        }
+
     }
 }

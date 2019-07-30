@@ -10,7 +10,6 @@ namespace FoodLibrary.Services.Impl
         private IWeatherService _weatherService;
         private ILoadJsonService _loadJsonService;
         private IUserFavorService _userFavorService;
-        private IUserChoiceService _userChoiceService;
         private ILogService _logService;
         private IFoodFavorService _foodFavorService;
         private List<FoodWeightChange> userFavorInformationList;
