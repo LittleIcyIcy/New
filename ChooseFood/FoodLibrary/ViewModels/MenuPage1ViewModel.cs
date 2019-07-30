@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
+using System.Security.Authentication;
 using System.Text;
 using FoodLibrary.Models;
 using FoodLibrary.Services;
@@ -16,11 +17,6 @@ namespace FoodLibrary.ViewModels
         /// 推荐服务。
         /// </summary>
         private IRecommendationService _recommendationService;
-
-        /// <summary>
-        /// 用于标志，同一道菜不能既赞又踩。
-        /// </summary>
-        private int[] flag = {0,0,0,0,0};
 
         /// <summary>
         /// 页面导航服务。
@@ -41,60 +37,39 @@ namespace FoodLibrary.ViewModels
             _recommendationCommand ?? (_recommendationCommand
                 = new RelayCommand(async () =>
                 {
-                    FoodInformationCollection.Clear();
-                    FoodInformationCollection.AddRange(await _recommendationService.ReFlashAsync());
+                    _foodInformations = await _recommendationService.ReFlashAsync();
+                    exchange(_foodInformations);
                 }));
         private RelayCommand _recommendationCommand;
 
         /// <summary>
         /// 所推荐的菜品的名称列表。
         /// </summary>
-        public ObservableRangeCollection<FoodInformation> FoodInformationCollection { get; } =
-            new ObservableRangeCollection<FoodInformation>();
+        public ObservableRangeCollection<FilterViewModel> FoodInformationCollection { get; } =
+            new ObservableRangeCollection<FilterViewModel>();
 
         /// <summary>
-        /// 第一个点赞按钮。
+        /// 接收随机生成的推荐菜单
         /// </summary>
-        public RelayCommand ZanCommand1 =>
-            _zanCommand1 ?? (_zanCommand1 = new RelayCommand(() =>
-            {
-                if (flag[0] == 0)
-                {
-                    _navigationService.NavigateTo("LikePage");
-                    flag[0] = 1;
-                }
-            }));
-        private RelayCommand _zanCommand1;
+        private List<FoodInformation> _foodInformations = new List<FoodInformation>();
 
         /// <summary>
-        /// 第一个踩的按钮。
+        /// 将FoodInformation包装成FilterViewModel
         /// </summary>
-        public RelayCommand CaiCommand1 =>
-            _caiCommand1 ?? (_caiCommand1 = new RelayCommand(() =>
-            {
-                if (flag[0] == 0)
-                {
-                    _navigationService.NavigateTo("DislikePage");
-                    flag[0] = 2;
-                }
-
-            }));
-        private RelayCommand _caiCommand1;
-
-
-
-
-
+        /// <param name="foodInformations"></param>
+        private void exchange(List<FoodInformation> foodInformations) {
+            FoodInformationCollection.Clear();
+            foreach (var foodInformation in foodInformations) {
+                FilterViewModel filterViewModel = new FilterViewModel(_navigationService);
+                filterViewModel.FoodInformation = foodInformation;
+                FoodInformationCollection.Add(filterViewModel);
+            }
+        }
 
 
 
         public class FilterViewModel :ViewModelBase
         {
-            /// <summary>
-            /// 父ViewModel
-            /// </summary>
-            private MenuPage1ViewModel _menuPage1ViewModel;
-
             private INavigationService _navigationService;
 
             private FoodInformation _foodInformation;
@@ -104,12 +79,12 @@ namespace FoodLibrary.ViewModels
             /// 构造函数
             /// </summary>
             /// <param name="menuPage1ViewModel"></param>
-            public FilterViewModel(MenuPage1ViewModel menuPage1ViewModel,
-                INavigationService navigationService)
+            public FilterViewModel(INavigationService navigationService)
             {
-                _menuPage1ViewModel = menuPage1ViewModel;
                 _navigationService = navigationService;
             }
+
+            public FilterViewModel() { }
 
             public FoodInformation FoodInformation
             {
@@ -130,13 +105,29 @@ namespace FoodLibrary.ViewModels
                 _zanCommand ?? (_zanCommand = 
                     new RelayCommand(() => 
                     {
-                        if (flag_zan == 1)//连续点击两下会取消
-                        {
-                            flag_zan = 0;
-                            //把原来的原因给取消了
+                        if (flag_zan == 0) {
+                            _navigationService.NavigateTo("LikePage");
+                            flag_zan = 1;
+                            flag_cai = 0;
+                            //改变button的颜色
                         }
-                        
                     }));
+
+            /// <summary>
+            /// 点踩按钮的绑定。
+            /// </summary>
+            private RelayCommand _caiCommand;
+
+            public RelayCommand CaiCommand =>
+                _caiCommand ?? (_caiCommand = 
+                    new RelayCommand(() => {
+                        if (flag_cai == 0) {
+                            _navigationService.NavigateTo("DislikePage");
+                            flag_cai = 1;
+                            flag_zan = 0;
+                        }
+                    }));
+
         }
 
     }

@@ -16,10 +16,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="90"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
-        </Grid.ColumnDefinitions>
         <TextBlock Text="今日推荐"
                    FontSize="18"
                    Grid.Row="0"
@@ -33,118 +29,36 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <RelativePanel>
-                        <HyperlinkButton NavigateUri="{Binding Url}"
+                        <HyperlinkButton NavigateUri="{Binding FoodInformation.Url}"
                                          x:Name="NameBlock">
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding FoodInformation.Name}"/>
                         </HyperlinkButton>
-                        <TextBlock Text="{Binding FoodElements}"
+                        <TextBlock Text="{Binding FoodInformation.FoodElements}"
                                            x:Name="ElementBlock"
                                            RelativePanel.RightOf="NameBlock"
-                                           Margin="50,7,0,0">
-                        </TextBlock>
+                                           Margin="50,7,0,0"/>
+                        <Button Name="Zan"
+                                Width="40"
+                                Height="40"
+                                FontSize="15"
+                                Background="White"
+                                RelativePanel.RightOf="ElementBlock"
+                                Command="{Binding ZanCommand}">
+                            <Image Source="sucai/zan.jpg"/>
+                        </Button>
+                        <Button Name="Cai"
+                                Width="40"
+                                Height="40"
+                                FontSize="15"
+                                Background="White"
+                                RelativePanel.RightOf="Zan"
+                                Command="{Binding CaiCommand}">
+                            <Image Source="sucai/cai.jpg"/>
+                        </Button>
                     </RelativePanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <RelativePanel Grid.Row="1"
-                       Grid.Column="1"
-                       HorizontalAlignment="Center">
-            <RelativePanel Height="40"
-                           Width="80"
-                           Name="FirstRelativePanel">
-                <Button Width="40"
-                        Height="40"
-                        Name="First"
-                        FontSize="15"
-                        Background="White"
-                        Command="{Binding ZanCommand1}">
-                    <Image Source="sucai/zan.jpg"/>
-                </Button>
-                <Button Background="White"
-                        Width="40"
-                        Height="40"
-                        RelativePanel.RightOf="First"
-                        Command="{Binding CaiCommand1}">
-                    <Image Source="sucai/cai.jpg"/>
-                </Button>
-            </RelativePanel>
-            <RelativePanel Height="40"
-                           Width="80"
-                           Name="SecondRelativePanel"
-                           RelativePanel.Below="FirstRelativePanel">
-                <Button Width="40"
-                        Height="40"
-                        Name="Second"
-                        Background="White"
-                        Command="{Binding ZanCommand}">
-                    <Image Source="sucai/zan.jpg"/>
-                </Button>
-                <Button Background="White"
-                        Width="40"
-                        Height="40"
-                        RelativePanel.RightOf="Second"
-                        Command="{Binding CaiCommand}">
-                    <Image Source="sucai/cai.jpg"/>
-                </Button>
-            </RelativePanel>
-            <RelativePanel Height="40"
-                           Width="80"
-                           Name="ThirdRelativePanel"
-                           RelativePanel.Below="SecondRelativePanel">
-                <Button Width="40"
-                        Height="40"
-                        Background="White"
-                        Name="Third"
-                        Command="{Binding ZanCommand}">
-                    <Image Source="sucai/zan.jpg"/>
-                </Button>
-                <Button Width="40"
-                        Height="40"
-                        Background="White"
-                        RelativePanel.RightOf="Third"
-                        Command="{Binding CaiCommand}">
-                    <Image Source="sucai/cai.jpg"/>
-                </Button>
-            </RelativePanel>
-            <RelativePanel Height="40"
-                           Width="80"
-                           Name="ForthRelativePanel"
-                           RelativePanel.Below="ThirdRelativePanel">
-                <Button Width="40"
-                        Height="40"
-                        Background="White"
-                        Name="Forth"
-                        Command="{Binding ZanCommand}">
-                    <Image Source="sucai/zan.jpg"/>
-                </Button>
-                <Button Width="40"
-                        Height="40"
-                        Background="White"
-                        RelativePanel.RightOf="Forth"
-                        Command="{Binding CaiCommand}">
-                    <Image Source="sucai/cai.jpg"/>
-                </Button>
-            </RelativePanel>
-            <RelativePanel Height="40"
-                           Width="80"
-                           Background="White"
-                           RelativePanel.Below="ForthRelativePanel">
-                <Button Width="40"
-                        Height="40"
-                        Background="White"
-                        Name="Fifth"
-                        Command="{Binding ZanCommand}">
-                    <Image Source="sucai/zan.jpg"/>
-                </Button>
-                <Button Width="40"
-                        Height="40"
-                        Background="White"
-                        RelativePanel.RightOf="Fifth"
-                        Command="{Binding CaiCommand}">
-                    <Image Source="sucai/cai.jpg"/>
-                </Button>
-            </RelativePanel>
-        </RelativePanel>
         <Button Grid.Row="2"
                 Background="White"
                 HorizontalAlignment="Center"
