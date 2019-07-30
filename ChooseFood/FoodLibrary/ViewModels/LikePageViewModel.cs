@@ -21,25 +21,26 @@ namespace FoodLibrary.ViewModels
         private RelayCommand _forthCommand;
         private RelayCommand _fifthCommand;
 
-        private int [] _reasonList = {0,0,0,0,0};
+        /// <summary>
+        /// 标志是否为无理由的喜欢或者不喜欢。
+        /// </summary>
+        private int flag = 0;
+
+        private int [] _reasonList = {0,0,0,0,0,0};
 
         public RelayCommand FirstCommand =>
             _firstCommand ?? (_firstCommand = 
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[4] == 1) {
-                        _reasonList[0] = 0;
-                        //还要有改变button颜色的语句。
+                    if (_reasonList[0] == 0) {
+                        _reasonList[0] = 1;
+                        
+                        //改变按钮颜色
+                        
                     }
                     else {
-                        if (_reasonList[0] == 0)
-                            _reasonList[0] = 1;
-                        //还要有改变button颜色的语句。
-                        else
-                        {
-                            _reasonList[0] = 0;
-                            //还要有改变button颜色的语句。
-                        }
+                        _reasonList[0] = 0;
+                        //改变按钮颜色
                     }
                 }));
 

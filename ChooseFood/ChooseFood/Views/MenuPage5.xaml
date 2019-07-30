@@ -10,25 +10,22 @@
     DataContext="{Binding MenuPage5ViewModel,Source={StaticResource ViewModelLocator}}">
 
     <Grid>
-        <Button Name="log"
-                Content="登录"
-                Width="50"
+        <Button Width="50"
                 Height="50"
-                Command="{Binding}"
+                Content="登录"
+                Command="{Binding LogCommand}"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"/>
-        <Button Name="sync"
-                Content="同步"
-                Width="50"
+        <Button Width="100"
                 Height="50"
-                Command="{Binding}"
+                Content="数据同步"
+                Command="{Binding SynCommand}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"/>
-        <Button Name="logout"
-                Content="注销"
-                Width="50"
+        <Button Width="50"
                 Height="50"
-                Command="{Binding}"
+                Content="注销"
+                Command="{Binding LogoutCommand}"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left"/>
     </Grid>
