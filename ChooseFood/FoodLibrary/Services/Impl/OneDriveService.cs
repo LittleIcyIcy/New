@@ -122,8 +122,9 @@ namespace FoodLibrary.Services.Impl
         /// 保存日志
         /// </summary>
         /// <param name="LogList"></param>
-        public async void SaveLogAsync(List<Log> LogList)
+        public async void SaveLogAsync()
         {
+            List<Log> LogList = await _userChoiceService.ReadJsonAsync();
 
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(LogList);
 
@@ -203,9 +204,9 @@ namespace FoodLibrary.Services.Impl
         /// 保存食物被选择的偏好
         /// </summary>
         /// <param name="FoodWeight"></param>
-        public async void SaveFoodWeightAsync(List<FoodWeightChange> FoodWeight)
+        public async void SaveFoodWeightAsync()
         {
-
+            List<FoodWeightChange> FoodWeight = await _userFavorService.ReadJsonAsync();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(FoodWeight);
 
             MemoryStream fileStream = new MemoryStream();

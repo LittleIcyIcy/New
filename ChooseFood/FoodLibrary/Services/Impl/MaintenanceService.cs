@@ -18,29 +18,36 @@ namespace FoodLibrary.Services.Impl
         }
 
         private IRecommendationService _recommendationService;
-
         private IUserChoiceService _userChoiceService;
         private IUserFavorService _userFavorService;
         private IOneDriveService _oneDriveService;
         private ILastTimeCommitService _lastTimeCommitService;
+        public ILogService _logService;
+        public IFoodFavorService _foodFavorService;
 
         public MaintenanceService(IRecommendationService recommendationService, IUserChoiceService userChoiceService,
-            IUserFavorService userFavorService, IOneDriveService oneDriveService, ILastTimeCommitService lastTimeCommitService)
+            IUserFavorService userFavorService, IOneDriveService oneDriveService, ILastTimeCommitService lastTimeCommitService,
+            ILogService logService, IFoodFavorService foodFavorService)
         {
             _recommendationService = recommendationService;
             _userChoiceService = userChoiceService;
             _userFavorService = userFavorService;
             _oneDriveService = oneDriveService;
             _lastTimeCommitService = lastTimeCommitService;
+            _logService = logService;
+            _foodFavorService = foodFavorService;
         }
 
         public async System.Threading.Tasks.Task MaintenanceAsync()
         {
-            List<Log> localLog = await _userChoiceService.ReadJsonAsync();
+            List<Log> localLog = _logService.GetLogs();
             List<Log> cloudLog = await _oneDriveService.LoadLogAsync();
 
             DateTime lastCommitTime = await _lastTimeCommitService.ReadJsonAsync();
-
+            if (lastCommitTime == null)
+            {
+                lastCommitTime = DateTime.Now;
+            }
             List<FoodWeightChange> totalWeight = await _oneDriveService.LoadFoodWeightAsync();
             var foodInformationList = _recommendationService.GetFoodInfs();
 
@@ -93,10 +100,10 @@ namespace FoodLibrary.Services.Impl
                 }
 
                 localLog = cloudLog;
+                _logService.SetLogs(cloudLog);
                 _userChoiceService.SaveJsonAsync(localLog);
                 lastCommitTime = DateTime.Now;
                 _lastTimeCommitService.SaveJsonAsync(lastCommitTime);
-
             }
         }
 

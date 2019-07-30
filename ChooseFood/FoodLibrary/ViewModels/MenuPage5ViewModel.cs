@@ -55,8 +55,8 @@ namespace FoodLibrary.ViewModels
                 new RelayCommand(() => 
                 {
                     _maintenanceService.MaintenanceAsync();
-                    _oneDriveService.SaveFoodWeightAsync(null);
-                    _oneDriveService.SaveLogAsync(null);
+                    _oneDriveService.SaveFoodWeightAsync();
+                    _oneDriveService.SaveLogAsync();
                 }));
     }
 }

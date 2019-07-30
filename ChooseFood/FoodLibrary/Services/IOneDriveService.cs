@@ -11,9 +11,9 @@ namespace FoodLibrary.Services
         void SignInAsync();
         void SignOutAsync();
         Task<bool> SignSituationAsync();
-        void SaveLogAsync(List<Log> LogList);
+        void SaveLogAsync();
         Task<List<Log>> LoadLogAsync();
-        void SaveFoodWeightAsync(List<FoodWeightChange> FoodWeight);
+        void SaveFoodWeightAsync();
         Task<List<FoodWeightChange>> LoadFoodWeightAsync();
 
     }

@@ -28,5 +28,15 @@ namespace FoodLibrary.Services.Impl
         {
             _userChoiceService.SaveJsonAsync(LogList);
         }
+
+        public List<Log> GetLogs()
+        {
+            return LogList;
+        }
+
+        public void SetLogs(List<Log> logs)
+        {
+            LogList = logs;
+        }
     }
 }
