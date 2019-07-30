@@ -48,8 +48,10 @@ namespace ChooseFood
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<ILogService,LogService>();
             SimpleIoc.Default.Register<IFoodFavorService, FoodFavorService>();
+            SimpleIoc.Default.Register<ILastTimeCommitService,LastTimeCommitService>();
             SimpleIoc.Default.Register<IOneDriveService, OneDriveService>();
             SimpleIoc.Default.Register<IMaintenanceService,MaintenanceService>();
+
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<MenuPage1ViewModel>();
             SimpleIoc.Default.Register<MenuPage2ViewModel>();

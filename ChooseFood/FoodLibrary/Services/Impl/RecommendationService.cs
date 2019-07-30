@@ -217,7 +217,7 @@ namespace FoodLibrary.Services.Impl
             // reason 2 热
             // reason 3 干
             // reason 4 正常
-            // reason 5 温
+            // reason 5 湿
 
             int pos = FindNameIndex(food_name);
             for (int i = 0; i < reason.Count; i++)
