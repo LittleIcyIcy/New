@@ -28,8 +28,10 @@ namespace ChooseFood.Views
             this.InitializeComponent();
         }
 
-        private void MenuPage1_OnLoaded(object sender, RoutedEventArgs e) {
+        private void MenuPage1_OnLoaded(object sender, RoutedEventArgs e)
+        {
             ((MenuPage1ViewModel)DataContext).RecommendationCommand.Execute(null);
         }
+
     }
 }
