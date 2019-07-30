@@ -18,6 +18,13 @@ namespace ChooseFood.Services.Impl
         /// </summary>
         private Type _currentPage = typeof(MainPage);
 
+        private string _foodName;
+
+        public string FoodName() {
+            return _foodName;
+
+        }
+
         public void SetFrame(Frame frame)
         {
             _frame = frame;
@@ -36,7 +43,7 @@ namespace ChooseFood.Services.Impl
                 ("DislikePage",typeof(DislikePage))
             };
 
-        public void NavigateTo(string pageName)
+        public void NavigateTo(string pageName,string foodName)
         {
             var item = _pages.First(p => p.Tag.Equals(pageName));
 
@@ -46,6 +53,8 @@ namespace ChooseFood.Services.Impl
             _frame.Navigate(item.Page);
 
             _currentPage = item.Page;
+
+            _foodName = foodName;
         }
     }
 }

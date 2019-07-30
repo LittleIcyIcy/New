@@ -106,7 +106,7 @@ namespace FoodLibrary.ViewModels
             (_navigationCommand =
                 new RelayCommand<string>((s) =>
                 {
-                    _navigationService.NavigateTo(s);
+                    _navigationService.NavigateTo(s,null);
                 }));
 
 

@@ -37,6 +37,10 @@ namespace FoodLibrary.ViewModels
             _navigationService = navigationService;
         }
 
+        /// <summary>
+        /// 跟页面的Loaded函数绑定。
+        /// </summary>
+        /// <returns></returns>
         public async System.Threading.Tasks.Task ShowAsync()
         {
             if (flag == 0) {
@@ -82,6 +86,9 @@ namespace FoodLibrary.ViewModels
 
 
 
+
+
+
         public class FilterViewModel :ViewModelBase
         {
             private INavigationService _navigationService;
@@ -120,7 +127,7 @@ namespace FoodLibrary.ViewModels
                     new RelayCommand(() => 
                     {
                         if (flag_zan == 0) {
-                            _navigationService.NavigateTo("LikePage");
+                            _navigationService.NavigateTo("LikePage",_foodInformation.Name);
                             flag_zan = 1;
                             flag_cai = 0;
                             //改变button的颜色
@@ -136,7 +143,7 @@ namespace FoodLibrary.ViewModels
                 _caiCommand ?? (_caiCommand = 
                     new RelayCommand(() => {
                         if (flag_cai == 0) {
-                            _navigationService.NavigateTo("DislikePage");
+                            _navigationService.NavigateTo("DislikePage",_foodInformation.Name);
                             flag_cai = 1;
                             flag_zan = 0;
                         }

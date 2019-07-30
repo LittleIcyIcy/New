@@ -4,8 +4,8 @@ using System.Text;
 
 namespace FoodLibrary.Services
 {
-    public interface INavigationService
-    {
-        void NavigateTo(string pageName);
+    public interface INavigationService {
+        string FoodName();
+        void NavigateTo(string pageName,string foodName);
     }
 }

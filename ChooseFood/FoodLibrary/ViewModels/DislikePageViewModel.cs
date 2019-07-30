@@ -134,7 +134,7 @@ namespace FoodLibrary.ViewModels
             _confirmCommand ?? (_confirmCommand =
                 new RelayCommand(() =>
                 {
-                    _navigationService.NavigateTo("今日推荐");
+                    _navigationService.NavigateTo("今日推荐",null);
 
                     //这个_reasonList要传给谁？
                 }));
