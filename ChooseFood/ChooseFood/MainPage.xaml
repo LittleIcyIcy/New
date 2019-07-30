@@ -33,6 +33,10 @@
                                     Tag="MenuPage4"
                                     Icon="Setting"
                                     FontSize="18"/>
+                <NavigationViewItem Content="数据同步"
+                                    Tag="MenuPage5"
+                                    Icon="save"
+                                    FontSize="18"/>
             </NavigationView.MenuItems>
             <NavigationView.PaneFooter >
                 <RelativePanel Height="100">

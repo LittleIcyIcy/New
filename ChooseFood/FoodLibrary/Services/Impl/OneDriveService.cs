@@ -16,6 +16,11 @@ namespace FoodLibrary.Services.Impl
 {
     public class OneDriveService : IOneDriveService
     {
+        private ILastTimeCommitService _lastTimeCommitService;
+
+        private IUserFavorService _userFavorService;
+
+        private IUserChoiceService _userChoiceService;
         public class OneDriveOAuthSettings
         {
             public const string ApplicationId = //"YOUR_APP_ID_HERE";
@@ -30,11 +35,17 @@ namespace FoodLibrary.Services.Impl
         private GraphServiceClient graphClient;
         private string _status;
         public event EventHandler StatusChanged;
+
         /// <summary>
         /// 云服务初始化
         /// </summary>
-        public OneDriveService()
+        public OneDriveService(ILastTimeCommitService lastTimeCommitService
+            ,IUserFavorService userFavorService,IUserChoiceService userChoiceService)
         {
+            _userChoiceService = userChoiceService;
+            _userFavorService = userFavorService;
+            _lastTimeCommitService = lastTimeCommitService;
+
             var builder = PublicClientApplicationBuilder.Create(OneDriveOAuthSettings.ApplicationId);
             pca = builder.Build();
 

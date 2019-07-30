@@ -28,6 +28,9 @@ namespace ChooseFood
         public MenuPage4ViewModel MenuPage4ViewModel =>
             SimpleIoc.Default.GetInstance<MenuPage4ViewModel>();
 
+        public MenuPage5ViewModel MenuPage5ViewModel =>
+            SimpleIoc.Default.GetInstance<MenuPage5ViewModel>();
+
         public LikePageViewModel LikePageViewModel =>
             SimpleIoc.Default.GetInstance<LikePageViewModel>();
 
@@ -52,6 +55,7 @@ namespace ChooseFood
             SimpleIoc.Default.Register<MenuPage2ViewModel>();
             SimpleIoc.Default.Register<MenuPage3ViewModel>();
             SimpleIoc.Default.Register<MenuPage4ViewModel>();
+            SimpleIoc.Default.Register<MenuPage5ViewModel>();
             SimpleIoc.Default.Register<LikePageViewModel>();
             SimpleIoc.Default.Register<DislikePageViewModel>();
         }

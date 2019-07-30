@@ -31,6 +31,7 @@ namespace ChooseFood.Services.Impl
                 ("历史记录", typeof(MenuPage2)),
                 ("预览菜单", typeof(MenuPage3)),
                 ("设置", typeof(MenuPage4)),
+                ("数据同步",typeof(MenuPage5)),
                 ("LikePage",  typeof(LikePage)),
                 ("DislikePage",typeof(DislikePage))
             };

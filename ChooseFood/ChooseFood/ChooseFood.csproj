@@ -151,6 +151,9 @@
     <Compile Include="Views\MenuPage4.xaml.cs">
       <DependentUpon>MenuPage4.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MenuPage5.xaml.cs">
+      <DependentUpon>MenuPage5.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -206,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuPage4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuPage5.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

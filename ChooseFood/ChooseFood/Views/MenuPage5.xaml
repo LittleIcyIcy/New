@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="ChooseFood.Views.MenuPage5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ChooseFood.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding MenuPage5ViewModel,Source={StaticResource ViewModelLocator}}">
+
+    <Grid>
+        <Button Name="log"
+                Content="登录"
+                Width="50"
+                Height="50"
+                Command="{Binding}"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"/>
+        <Button Name="sync"
+                Content="同步"
+                Width="50"
+                Height="50"
+                Command="{Binding}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"/>
+        <Button Name="logout"
+                Content="注销"
+                Width="50"
+                Height="50"
+                Command="{Binding}"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"/>
+    </Grid>
+</Page>
