@@ -30,13 +30,15 @@
                 <DataTemplate>
                     <RelativePanel>
                         <HyperlinkButton NavigateUri="{Binding FoodInformation.Url}"
-                                         x:Name="NameBlock">
+                                         x:Name="NameBlock"
+                                         Width="70">
                             <TextBlock Text="{Binding FoodInformation.Name}"/>
                         </HyperlinkButton>
                         <TextBlock Text="{Binding FoodInformation.FoodElements}"
                                            x:Name="ElementBlock"
                                            RelativePanel.RightOf="NameBlock"
-                                           Margin="50,7,0,0"/>
+                                           Margin="50,7,0,0"
+                                           Width="700"/>
                         <Button Name="Zan"
                                 Width="40"
                                 Height="40"

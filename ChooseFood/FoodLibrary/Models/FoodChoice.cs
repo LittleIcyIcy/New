@@ -8,5 +8,6 @@ namespace FoodLibrary.Models
     {
         public String FoodName { get; set; }
         public DateTime Date { get; set; }
+
     }
 }

@@ -7,9 +7,46 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    DataContext="{Binding MenuPage2ViewModel, Source={StaticResource ViewModelLocator}}">
+    DataContext="{Binding MenuPage2ViewModel, Source={StaticResource ViewModelLocator}}"
+    Loaded="MenuPage2_OnLoaded">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="历史记录"
+                   FontSize="18"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        <ListView Grid.Row="1"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  ItemsSource="{Binding HistoricFoodInformationsCollection}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <RelativePanel>
+                        <TextBlock Name="Date"
+                                   FontSize="9"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Text="{Binding Date}"/>
+                        <TextBlock Name="Temperature"
+                                   FontSize="9"
+                                   RelativePanel.RightOf="Date"
+                                   Text="{Binding WeatherList[0]}"/>
+                        <TextBlock Name="Humidity"
+                                   FontSize="9"
+                                   RelativePanel.RightOf="Temperature"
+                                   Text="{Binding WeatherList[1]}"/>
+                        <TextBlock Name="FoodName"
+                                   FontSize="9"
+                                   RelativePanel.Below="Date"
+                                   Width="90"
+                                   Text="{Binding FoodName}"/>
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
