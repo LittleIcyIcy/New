@@ -40,6 +40,8 @@ namespace ChooseFood.Services.Impl
                 ("设置", typeof(MenuPage4)),
                 ("数据同步",typeof(MenuPage5)),
                 ("LikePage",  typeof(LikePage)),
+                ("FirstPage",typeof(FirstPage)),
+                ("ImagePage",typeof(ImagePage)),
                 ("DislikePage",typeof(DislikePage))
             };
 

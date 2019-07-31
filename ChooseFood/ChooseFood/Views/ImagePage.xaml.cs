@@ -20,15 +20,11 @@ namespace ChooseFood.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class FirstPage : Page
+    public sealed partial class ImagePage : Page
     {
-        public FirstPage()
+        public ImagePage()
         {
             this.InitializeComponent();
-        }
-
-        private void ToggleSwitch_OnToggled(object sender, RoutedEventArgs e) {
-            
         }
     }
 }

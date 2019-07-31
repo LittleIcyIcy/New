@@ -41,8 +41,8 @@ namespace ChooseFood
 
         private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            ((MainPageViewModel)DataContext).InitAllInformationCommand.Execute(null);
-            ((MainPageViewModel)DataContext).RefreshCommand.Execute(null);
+            ((MainPageViewModel)DataContext).ToFirstCommand.Execute(null);
+
         }
     }
 }

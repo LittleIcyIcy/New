@@ -9,6 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <RelativePanel>
+            <ProgressRing Name="Progress"
+                          Width="100"
+                          Height="100"
+                          FontSize="34"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+            <TextBlock Text="程序正在初始化，请您稍等呢亲！"
+                       RelativePanel.Above="Progress"/>
+        </RelativePanel>
     </Grid>
 </Page>

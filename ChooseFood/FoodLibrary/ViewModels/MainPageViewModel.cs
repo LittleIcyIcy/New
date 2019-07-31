@@ -82,19 +82,15 @@ namespace FoodLibrary.ViewModels
         public Weather WeatherRoot;
 
         /// <summary>
-        /// 天气刷新按钮。
+        /// 显示天气。
         /// </summary>
-        private RelayCommand _refreshCommand;
-        public RelayCommand RefreshCommand =>
-            _refreshCommand ?? (_refreshCommand
-            = new RelayCommand(async () =>
-            {
-                _weatherRootData = await _weatherService.GetWeatherAsync();
-                Temperature = _weatherRootData.main.temp + "℃";
-                Humidity = _weatherRootData.main.humidity;
-                Site = _weatherRootData.sys.country;
-            }));
-
+        /// <returns></returns>
+        public async System.Threading.Tasks.Task RefreshWeatherAsync() {
+            _weatherRootData = await _weatherService.GetWeatherAsync();
+            Temperature = _weatherRootData.main.temp + "℃";
+            Humidity = _weatherRootData.main.humidity;
+            Site = _weatherRootData.sys.country;
+        }
 
         private RelayCommand<string> _navigationCommand;
 
@@ -110,15 +106,14 @@ namespace FoodLibrary.ViewModels
                 }));
 
 
-        /// <summary>
-        /// 初始化本程序。
-        /// </summary>
-        private RelayCommand _initAllIformationCommand;
-        public RelayCommand InitAllInformationCommand =>
-            _initAllIformationCommand ?? (_initAllIformationCommand =
-                new RelayCommand(() => 
-                {
+        private RelayCommand _toFirstCommand;
+
+        public RelayCommand ToFirstCommand =>
+            _toFirstCommand ?? (_toFirstCommand = 
+                new RelayCommand(() => {
                     _recommendationService.InitRecommendationAsync();
+                    RefreshWeatherAsync();
+                    _navigationService.NavigateTo("ImagePage",null);
                 }));
 
     }
