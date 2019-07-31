@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FoodLibrary.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -25,6 +26,10 @@ namespace ChooseFood.Views
         public DislikePage()
         {
             this.InitializeComponent();
+        }
+
+        private void DislikePage_OnLoaded(object sender, RoutedEventArgs e) {
+            ((DislikePageViewModel)DataContext).ReceiveFoodNameCommand.Execute(null);
         }
     }
 }

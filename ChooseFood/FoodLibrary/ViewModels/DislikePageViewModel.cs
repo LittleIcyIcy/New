@@ -11,10 +11,28 @@ namespace FoodLibrary.ViewModels
     {
         private INavigationService _navigationService;
 
-        public DislikePageViewModel(INavigationService navigationService)
+        private IRecommendationService _recommendationService;
+
+        public DislikePageViewModel(INavigationService navigationService,
+            IRecommendationService recommendationService)
         {
             _navigationService = navigationService;
+            _recommendationService = recommendationService;
         }
+
+        private string _foodName;
+
+        /// <summary>
+        /// 导航至当前页面时，接受相对应的菜名
+        /// </summary>
+        private RelayCommand _receiveFoodNameCommand;
+        public RelayCommand ReceiveFoodNameCommand =>
+            _receiveFoodNameCommand ?? (_receiveFoodNameCommand =
+                new RelayCommand(() => {
+                    _foodName = _navigationService.FoodName();
+                }));
+
+        private int[] _reasonList = { 0, 0, 0, 0, 0, 0 };
 
         private RelayCommand _firstCommand;
         private RelayCommand _secondCommand;
@@ -22,27 +40,35 @@ namespace FoodLibrary.ViewModels
         private RelayCommand _forthCommand;
         private RelayCommand _fifthCommand;
 
-        private int[] _reasonList = { 0, 0, 0, 0, 0 };
+        /// <summary>
+        /// 标志是否为无理由的喜欢或者不喜欢。
+        /// </summary>
+        private int flag = 0;
 
         public RelayCommand FirstCommand =>
             _firstCommand ?? (_firstCommand =
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[4] == 1)
+                    if (_reasonList[0] == 0)
                     {
-                        _reasonList[0] = 0;
-                        //还要有改变button颜色的语句。
+                        _reasonList[0] = -1;
+                        if (flag == -1)
+                        {
+                            flag = 0;
+                            //改变没有原因的那个button的颜色
+                        }
+
+                        if (_reasonList[2] == -1)
+                        {
+                            _reasonList[2] = 0;
+                            //改变这个按钮颜色
+                        }
+                        //改变按钮颜色
                     }
                     else
                     {
-                        if (_reasonList[0] == 0)
-                            _reasonList[0] = 1;
-                        //还要有改变button颜色的语句。
-                        else
-                        {
-                            _reasonList[0] = 0;
-                            //还要有改变button颜色的语句。
-                        }
+                        _reasonList[0] = 0;
+                        //改变按钮颜色
                     }
                 }));
 
@@ -50,21 +76,26 @@ namespace FoodLibrary.ViewModels
             _secondCommand ?? (_secondCommand =
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[4] == 1)
+                    if (_reasonList[2] == 0)
                     {
-                        _reasonList[1] = 0;
-                        //还要有改变button颜色的语句。
+                        _reasonList[2] = -1;
+                        if (flag == -1)
+                        {
+                            flag = 0;
+                            //改变没有原因的那个button的颜色
+                        }
+
+                        if (_reasonList[0] == -1)
+                        {
+                            _reasonList[0] = 0;
+                            //改变这个按钮颜色
+                        }
+                        //改变按钮颜色
                     }
                     else
                     {
-                        if (_reasonList[1] == 0)
-                            _reasonList[1] = 1;
-                        //还要有改变button颜色的语句。
-                        else
-                        {
-                            _reasonList[1] = 0;
-                            //还要有改变button颜色的语句。
-                        }
+                        _reasonList[2] = 0;
+                        //改变按钮颜色
                     }
                 }));
 
@@ -72,21 +103,26 @@ namespace FoodLibrary.ViewModels
             _thirdCommand ?? (_thirdCommand =
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[4] == 1)
+                    if (_reasonList[5] == 0)
                     {
-                        _reasonList[2] = 0;
-                        //还要有改变button颜色的语句。
+                        _reasonList[5] = -1;
+                        if (flag == -1)
+                        {
+                            flag = 0;
+                            //改变没有原因的那个button的颜色
+                        }
+
+                        if (_reasonList[3] == -1)
+                        {
+                            _reasonList[3] = 0;
+                            //改变这个按钮颜色
+                        }
+                        //改变按钮颜色
                     }
                     else
                     {
-                        if (_reasonList[2] == 0)
-                            _reasonList[2] = 1;
-                        //还要有改变button颜色的语句。
-                        else
-                        {
-                            _reasonList[2] = 0;
-                            //还要有改变button颜色的语句。
-                        }
+                        _reasonList[5] = 0;
+                        //改变按钮颜色
                     }
                 }));
 
@@ -94,21 +130,26 @@ namespace FoodLibrary.ViewModels
             _forthCommand ?? (_forthCommand =
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[4] == 1)
+                    if (_reasonList[3] == 0)
                     {
-                        _reasonList[3] = 0;
-                        //还要有改变button颜色的语句。
+                        _reasonList[3] = -1;
+                        if (flag == 1)
+                        {
+                            flag = 0;
+                            //改变没有原因的那个button的颜色
+                        }
+
+                        if (_reasonList[5] == -1)
+                        {
+                            _reasonList[5] = 0;
+                            //改变这个按钮颜色
+                        }
+                        //改变按钮颜色
                     }
                     else
                     {
-                        if (_reasonList[3] == 0)
-                            _reasonList[3] = 1;
-                        //还要有改变button颜色的语句。
-                        else
-                        {
-                            _reasonList[3] = 0;
-                            //还要有改变button颜色的语句。
-                        }
+                        _reasonList[3] = 0;
+                        //改变按钮颜色
                     }
                 }));
 
@@ -116,27 +157,38 @@ namespace FoodLibrary.ViewModels
             _fifthCommand ?? (_fifthCommand =
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[4] == 0)
+                    if (flag == 0)
                     {
-                        _reasonList = new[] { 0, 0, 0, 0, 1 };
-                        //颜色变化
+                        for (int i = 0; i < 6; i++)
+                        {
+                            _reasonList[i] = -1;
+                        }
+                        flag = 1;
+                        //改变按钮颜色
                     }
                     else
                     {
-                        _reasonList[4] = 0;
-                        //颜色
+                        for (int i = 0; i < 6; i++)
+                        {
+                            _reasonList[i] = 0;
+                        }
+                        flag = 0;
+                        //改变按钮颜色
                     }
                 }));
 
+        /// <summary>
+        /// 确定按钮的绑定。
+        /// </summary>
         private RelayCommand _confirmCommand;
 
         public RelayCommand ConfirmCommand =>
             _confirmCommand ?? (_confirmCommand =
                 new RelayCommand(() =>
                 {
-                    _navigationService.NavigateTo("今日推荐",null);
-
-                    //这个_reasonList要传给谁？
+                    List<int> reasonList = new List<int>(_reasonList);
+                    _recommendationService.ChangeWeight(_foodName, reasonList, true);
+                    _navigationService.NavigateTo("今日推荐", null);
                 }));
     }
 }

@@ -30,7 +30,7 @@ namespace ChooseFood.Views
 
         private void MenuPage1_OnLoaded(object sender, RoutedEventArgs e)
         {
-            ((MenuPage1ViewModel) DataContext).ShowAsync();
+            ((MenuPage1ViewModel)DataContext).ShowAsync();
         }
     }
 }
