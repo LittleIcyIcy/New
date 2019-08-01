@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FoodLibrary.Services.Impl
 {
-    public class RecommendationService: IRecommendationService
+    public class RecommendationService : IRecommendationService
     {
         private IWeatherService _weatherService;
         private ILoadJsonService _loadJsonService;
@@ -17,15 +17,14 @@ namespace FoodLibrary.Services.Impl
         private TempWeather weatherStatus;
 
         public RecommendationService(IWeatherService weatherService, ILoadJsonService loadJsonService
-            , IUserFavorService userFavorService,ILogService logService, IFoodFavorService foodFavorService)
+            , IUserFavorService userFavorService, ILogService logService, IFoodFavorService foodFavorService)
         {
             _weatherService = weatherService;
             _loadJsonService = loadJsonService;
             _userFavorService = userFavorService;
             _logService = logService;
-            _logService.InitAsync();
             _foodFavorService = foodFavorService;
-            _foodFavorService.InitAsync();
+
         }
 
 
@@ -34,8 +33,11 @@ namespace FoodLibrary.Services.Impl
         /// </summary>
         public async void InitRecommendationAsync()
         {
+
             userFavorInformationList = new List<FoodWeightChange>();
             foodInformationList = await _loadJsonService.ReadJsonAsync();
+            _foodFavorService.InitAsync(foodInformationList);
+            await _logService.InitAsync();
             userFavorInformationList = await _userFavorService.ReadJsonAsync();
             InitWeight(foodInformationList, userFavorInformationList);
             WeatherRoot data = await _weatherService.GetWeatherAsync();
@@ -221,18 +223,18 @@ namespace FoodLibrary.Services.Impl
             int pos = FindNameIndex(food_name);
             for (int i = 0; i < reason.Count; i++)
             {
-                if(reason[i] > 0 )
+                if (reason[i] > 0)
                 {
                     foodInformationList[pos].Weight[i] =
-                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (4 / 3)^reason[i])));
+                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (4 / 3) ^ reason[i])));
                 }
-                else if(reason[i] < 0)
+                else if (reason[i] < 0)
                 {
-                    foodInformationList[pos].Weight[i] = 
-                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[reason[i]] * (3 / 4)^(Math.Abs(reason[i])))));
+                    foodInformationList[pos].Weight[i] =
+                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (3 / 4) ^ (Math.Abs(reason[i])))));
 
                 }
-                
+
             }
 
             if (IsWriteToJson)
@@ -241,11 +243,11 @@ namespace FoodLibrary.Services.Impl
                 log.FoodName = food_name;
                 log.Date = DateTime.Now;
                 log.WeatherList = new List<int>(2);
-                log.WeatherList[0] = Int32.Parse(weatherStatus.Temperature.ToString());
-                log.WeatherList[1] = Int32.Parse(weatherStatus.Humidity.ToString());
+                log.WeatherList.Add((int)(weatherStatus.Temperature));
+                log.WeatherList.Add((int)(weatherStatus.Temperature));
                 log.WeightChangeList = reason;
                 _logService.AddLog(log);
-                _foodFavorService.ChangeWeight(pos,reason);
+                _foodFavorService.ChangeWeight(pos, reason);
 
             }
         }

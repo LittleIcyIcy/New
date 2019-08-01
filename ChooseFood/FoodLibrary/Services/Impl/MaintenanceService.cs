@@ -41,6 +41,10 @@ namespace FoodLibrary.Services.Impl
         public async System.Threading.Tasks.Task MaintenanceAsync()
         {
             List<Log> localLog = _logService.GetLogs();
+            if (localLog == null)
+            {
+                localLog = new List<Log>();
+            }
             List<Log> cloudLog = await _oneDriveService.LoadLogAsync();
 
             DateTime lastCommitTime = await _lastTimeCommitService.ReadJsonAsync();
@@ -49,6 +53,19 @@ namespace FoodLibrary.Services.Impl
                 lastCommitTime = DateTime.Now;
             }
             List<FoodWeightChange> totalWeight = await _oneDriveService.LoadFoodWeightAsync();
+            if (totalWeight.Count == 0)
+            {
+                List<FoodInformation> foodInformations = _recommendationService.GetFoodInfs();
+                for (int i = 0; i < foodInformations.Count; i++)
+                {
+                    FoodWeightChange foodWeightChange = new FoodWeightChange();
+                    foodWeightChange.FoodName = foodInformations[i].Name;
+                    int[] arr = { 0, 0, 0, 0, 0, 0 };
+                    List<int> reasonList = new List<int>(arr);
+                    foodWeightChange.weightChangeList = reasonList;
+                    totalWeight.Add(foodWeightChange);
+                }
+            }
             var foodInformationList = _recommendationService.GetFoodInfs();
 
             for (int i = 0; i < foodInformationList.Count; i++)
@@ -58,23 +75,29 @@ namespace FoodLibrary.Services.Impl
                 ChangeInformation cloudChangeInfList = GetChangeInf(cloudLog, lastCommitTime, FoodName);
 
                 ChangeInformation localChangeInfList = GetChangeInf(localLog, lastCommitTime, FoodName);
-
-                List<int> tmpWeightChangeList = new List<int>(6);
+                int[] arr = { 0, 0, 0, 0, 0, 0 };
+                List<int> tmpWeightChangeList = new List<int>(arr);
                 for (int j = 0; j < 9; j++)
                 {
+                    int flag = 0;
                     for (int k = 0; k < 6; k++)
                     {
                         if (cloudChangeInfList.Weight[j][k] >= 0 && localChangeInfList.Weight[j][k] >= 0)
                         {
                             if (cloudChangeInfList.Weight[j][k] >= localChangeInfList.Weight[j][k])
                             {
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + cloudChangeInfList.Weight[j][k];
                                 continue;
                             }
                             else if (cloudChangeInfList.Weight[j][k] < localChangeInfList.Weight[j][k])
                             {
-                                cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime);
-                                cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + (localChangeInfList.Weight[j][k] - cloudChangeInfList.Weight[j][k]);
+                                if (flag == 0)
+                                {
+                                    cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime);
+                                    cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                                    flag = 1;
+                                }
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
                             }
                         }
 
@@ -82,29 +105,39 @@ namespace FoodLibrary.Services.Impl
                         {
                             if (cloudChangeInfList.Weight[j][k] <= localChangeInfList.Weight[j][k])
                             {
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + cloudChangeInfList.Weight[j][k];
                                 continue;
                             }
                             else if (cloudChangeInfList.Weight[j][k] > localChangeInfList.Weight[j][k])
                             {
-                                cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime);
-                                cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + (localChangeInfList.Weight[j][k] - cloudChangeInfList.Weight[j][k]);
+                                if (flag == 0)
+                                {
+                                    cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime);
+                                    cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                                    flag = 1;
+                                }
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
                             }
                         }
                         else
                         {
-                            cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                            if (flag == 0)
+                            {
+                                cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                                flag = 1;
+                            }
                             tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
                         }
                     }
                 }
-
-                localLog = cloudLog;
-                _logService.SetLogs(cloudLog);
-                _userChoiceService.SaveJsonAsync(localLog);
-                lastCommitTime = DateTime.Now;
-                _lastTimeCommitService.SaveJsonAsync(lastCommitTime);
+                _foodFavorService.SetWeight(i, tmpWeightChangeList);
             }
+            localLog = cloudLog;
+            _logService.SetLogs(cloudLog);
+            _logService.SaveLogAsync();
+            _foodFavorService.SaveChangeWeightAsync();
+            lastCommitTime = DateTime.Now;
+            _lastTimeCommitService.SaveJsonAsync(lastCommitTime);
         }
 
 
@@ -113,10 +146,12 @@ namespace FoodLibrary.Services.Impl
             int i = 0;
             while (i < localLog.Count)
             {
-                if (localLog[i].FoodName == foodName && lastCommitTime > localLog[i].Date)
+                if (localLog[i].FoodName == foodName && lastCommitTime < localLog[i].Date)
                 {
                     cloudLog.Add(localLog[i]);
                 }
+
+                i++;
             }
 
             cloudLog.OrderBy(log => log.Date);
@@ -145,12 +180,13 @@ namespace FoodLibrary.Services.Impl
         {
             ChangeInformation changeInf = new ChangeInformation();
             changeInf.FoodName = foodName;
+            int[] arr = { 0, 0, 0, 0, 0, 0 };
             changeInf.Weight = new List<List<int>>(9);
 
             for (int i = 0; i < 9; i++)
             {
-                List<int> weight = new List<int>(6);
-                changeInf.Weight[i] = weight;
+                List<int> weight = new List<int>(arr);
+                changeInf.Weight.Add(weight);
             }
 
             for (int i = 0; i < cloudLog.Count; i++)
