@@ -12,5 +12,6 @@ namespace FoodLibrary.Models
         public List<string> Title { get; set; }
         public string Url { get; set; }
         public string FoodElements { get; set; }
+        public string FoodImage { get; set; }
     }
 }

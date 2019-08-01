@@ -17,8 +17,7 @@ namespace ChooseFood.Services.Impl
             List<FoodInformation> root = new List<FoodInformation>();
             await Task.Run(async () =>
             {
-                var uri = "ms-appx:///Assets/test_data.json";
-                //var uri = "ms-appx:///Assets/StoreLogo.png";
+                var uri = "ms-appx:///Assets//test_data_new.json";
                 var uri1 = new Uri(uri);
                 StorageFile file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uri1);
                 String text = await Windows.Storage.FileIO.ReadTextAsync(file);

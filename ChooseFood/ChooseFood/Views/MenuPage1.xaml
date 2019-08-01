@@ -22,45 +22,64 @@
                    Margin="0,0,-50,0"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"/>
-        <ListView Grid.Row="1"
-                  VerticalAlignment="Top"
-                  HorizontalAlignment="Center"
-                  ItemsSource="{Binding FoodInformationCollection}">
-            <ListView.ItemTemplate>
+        <FlipView Grid.Row="1"
+                  ItemsSource="{Binding FoodInformationCollection}"
+                  Width="500"
+                  Height="700">
+            <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <RelativePanel>
-                        <HyperlinkButton NavigateUri="{Binding FoodInformation.Url}"
-                                         x:Name="NameBlock"
-                                         Width="70">
-                            <TextBlock Text="{Binding FoodInformation.Name}"/>
-                        </HyperlinkButton>
-                        <TextBlock Text="{Binding FoodInformation.FoodElements}"
-                                           x:Name="ElementBlock"
-                                           RelativePanel.RightOf="NameBlock"
-                                           Margin="50,7,0,0"
-                                           Width="700"/>
-                        <Button Name="Zan"
-                                Width="40"
-                                Height="40"
-                                FontSize="15"
-                                Background="White"
-                                RelativePanel.RightOf="ElementBlock"
-                                Command="{Binding ZanCommand}">
-                            <Image Source="sucai/zan.jpg"/>
-                        </Button>
-                        <Button Name="Cai"
-                                Width="40"
-                                Height="40"
-                                FontSize="15"
-                                Background="White"
-                                RelativePanel.RightOf="Zan"
-                                Command="{Binding CaiCommand}">
-                            <Image Source="sucai/cai.jpg"/>
-                        </Button>
-                    </RelativePanel>
+                    <Grid>
+                        <Image Source="{Binding FoodInformation.FoodImage}"
+                               Width="500"
+                               Height="500"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Margin="0,-30,0,0"/>
+                        <Border Background="White" 
+                                Height="200" 
+                                Width="500"
+                                VerticalAlignment="Bottom"
+                                Margin="0,0,0,0">
+                            <RelativePanel>
+                                <HyperlinkButton NavigateUri="{Binding FoodInformation.Url}"
+                                                 Name="Name"
+                                                 Height="40"
+                                                 Width="500"
+                                                 VerticalAlignment="Top"
+                                                 HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding FoodInformation.Name}"/>
+                                </HyperlinkButton>
+                                <RelativePanel RelativePanel.Below="Name"
+                                               Width="80"
+                                               Height="40">
+                                    <TextBlock Name="Elements"
+                                               Text="{Binding FoodInformation.FoodElements}"
+                                               Height="40"
+                                               Width="500"/>
+                                    <Button Name="Zan"
+                                            Height="40"
+                                            Width="40"
+                                            Background="White"
+                                            Command="{Binding ZanCommand}"
+                                            RelativePanel.Below="Elements">
+                                        <Image Source="sucai/zan.jpg"/>
+                                    </Button>
+                                    <Button Name="Cai"
+                                            Height="40"
+                                            Width="40"
+                                            Background="White"
+                                            RelativePanel.Below="Elements"
+                                            RelativePanel.RightOf="Zan"
+                                            Command="{Binding CaiCommand}">
+                                        <Image Source="sucai/cai.jpg"/>
+                                    </Button>
+                                </RelativePanel>
+                            </RelativePanel>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </FlipView.ItemTemplate>
+        </FlipView>
         <Button Grid.Row="2"
                 Background="White"
                 HorizontalAlignment="Center"
