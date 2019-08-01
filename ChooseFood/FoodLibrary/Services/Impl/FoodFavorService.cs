@@ -14,9 +14,20 @@ namespace FoodLibrary.Services.Impl
             _userFavorService = foodFavorService;
         }
 
-        public async void InitAsync()
+        public async void InitAsync(List<FoodInformation> foodInformations)
         {
             FoodWeightChangesList = await _userFavorService.ReadJsonAsync();
+            if (FoodWeightChangesList.Count == 0)
+            {
+                FoodWeightChangesList = new List<FoodWeightChange>();
+                for (int i = 0; i < foodInformations.Count; i++)
+                {
+                    FoodWeightChange foodchange = new FoodWeightChange();
+                    foodchange.FoodName = foodInformations[i].Name;
+                    foodchange.weightChangeList = new List<int>() {0,0,0,0,0,0};
+                    FoodWeightChangesList.Add(foodchange);
+                }
+            }
         }
 
         public void ChangeWeight(int pos, List<int> changeWeight)
@@ -30,6 +41,11 @@ namespace FoodLibrary.Services.Impl
             return;
         }
 
+        public void SetWeight(int pos, List<int> changeWeight)
+        {
+            FoodWeightChangesList[pos].weightChangeList = changeWeight;
+            return;
+        }
         public async void SaveChangeWeightAsync()
         {
             _userFavorService.SaveJsonAsync(FoodWeightChangesList);

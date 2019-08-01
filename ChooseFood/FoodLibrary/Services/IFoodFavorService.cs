@@ -7,10 +7,12 @@ namespace FoodLibrary.Services
 {
     public interface IFoodFavorService
     {
-        void InitAsync();
+        void InitAsync(List<FoodInformation> foodInformations);
         void ChangeWeight(int pos, List<int> changeWeight);
         void SaveChangeWeightAsync();
 
         List<FoodWeightChange> GetFoodWeightChanges();
+
+        void SetWeight(int pos, List<int> changeWeight);
     }
 }

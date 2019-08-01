@@ -54,4 +54,39 @@ namespace FoodLibrary.Models
             }
         }
     }
+
+
+    public static class IntMethods
+    {
+        public static int TToInt(this Double d)
+        {
+            if (d < 0)
+            {
+                return 0;
+            }
+            else if (d > 30)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+        public static int HToInt(this Double d)
+        {
+            if (d < 30)
+            {
+                return 0;
+            }
+            else if (d < 60)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+    }
 }

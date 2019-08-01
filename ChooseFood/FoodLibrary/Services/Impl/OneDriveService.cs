@@ -21,6 +21,10 @@ namespace FoodLibrary.Services.Impl
         private IUserFavorService _userFavorService;
 
         private IUserChoiceService _userChoiceService;
+
+        private ILogService _logService;
+
+        private IFoodFavorService _foodFavorService;
         public class OneDriveOAuthSettings
         {
             public const string ApplicationId = //"YOUR_APP_ID_HERE";
@@ -40,12 +44,13 @@ namespace FoodLibrary.Services.Impl
         /// 云服务初始化
         /// </summary>
         public OneDriveService(ILastTimeCommitService lastTimeCommitService
-            ,IUserFavorService userFavorService,IUserChoiceService userChoiceService)
+            ,IUserFavorService userFavorService,IUserChoiceService userChoiceService, ILogService logService, IFoodFavorService foodFavorService)
         {
             _userChoiceService = userChoiceService;
             _userFavorService = userFavorService;
             _lastTimeCommitService = lastTimeCommitService;
-
+            _logService = logService;
+            _foodFavorService = foodFavorService;
             var builder = PublicClientApplicationBuilder.Create(OneDriveOAuthSettings.ApplicationId);
             pca = builder.Build();
 
@@ -124,8 +129,7 @@ namespace FoodLibrary.Services.Impl
         /// <param name="LogList"></param>
         public async void SaveLogAsync()
         {
-            List<Log> LogList = await _userChoiceService.ReadJsonAsync();
-
+            List<Log> LogList = _logService.GetLogs();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(LogList);
 
             MemoryStream fileStream = new MemoryStream();
@@ -206,7 +210,7 @@ namespace FoodLibrary.Services.Impl
         /// <param name="FoodWeight"></param>
         public async void SaveFoodWeightAsync()
         {
-            List<FoodWeightChange> FoodWeight = await _userFavorService.ReadJsonAsync();
+            List<FoodWeightChange> FoodWeight = _foodFavorService.GetFoodWeightChanges();
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(FoodWeight);
 
             MemoryStream fileStream = new MemoryStream();
@@ -228,7 +232,7 @@ namespace FoodLibrary.Services.Impl
             try
             {
                 await graphClient.Me.Drive.Root
-                    .ItemWithPath("/Log.zip").Content.Request()
+                    .ItemWithPath("/FoodWeightChange.zip").Content.Request()
                     .PutAsync<DriveItem>(fileStream);
             }
             catch (ServiceException ex)

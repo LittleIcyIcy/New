@@ -13,8 +13,8 @@ namespace Tests
         [Test]
         public void Test1()
         {
-            OneDriveService oneDriveService = new OneDriveService();
-            oneDriveService.SignInAsync();
+            //OneDriveService oneDriveService = new OneDriveService();
+            //oneDriveService.SignInAsync();
 
         }
     }

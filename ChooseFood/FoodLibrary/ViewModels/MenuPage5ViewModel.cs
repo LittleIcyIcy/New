@@ -4,6 +4,7 @@ using System.Text;
 using FoodLibrary.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Xceed.Wpf.Toolkit;
 
 namespace FoodLibrary.ViewModels
 {
@@ -43,20 +44,36 @@ namespace FoodLibrary.ViewModels
         private RelayCommand _logoutCommand;
         public RelayCommand LogoutCommand =>
             _logoutCommand ?? (_logoutCommand = 
-                new RelayCommand(() =>
+                new RelayCommand(async () =>
                 {
-                    _oneDriveService.SignOutAsync();
+                    bool sta = await _oneDriveService.SignSituationAsync();
+                    if (sta == true)
+                    {
+                        _oneDriveService.SignOutAsync();
+                    }
+                    else
+                    {
+                        //MessageBox.Show("未登录");
+                    }
                 }));
 
         private RelayCommand _synCommand;
 
         public RelayCommand SynCommand =>
             _synCommand ?? (_synCommand = 
-                new RelayCommand(() => 
+                new RelayCommand(async () => 
                 {
-                    _maintenanceService.MaintenanceAsync();
-                    _oneDriveService.SaveFoodWeightAsync();
-                    _oneDriveService.SaveLogAsync();
+                    bool sta = await _oneDriveService.SignSituationAsync();
+                    if (sta == true)
+                    {
+                        _maintenanceService.MaintenanceAsync();
+                        _oneDriveService.SaveFoodWeightAsync();
+                        _oneDriveService.SaveLogAsync();
+                    }
+                    else
+                    {
+                        //MessageBox.Show("请先进行登录");
+                    }
                 }));
     }
 }

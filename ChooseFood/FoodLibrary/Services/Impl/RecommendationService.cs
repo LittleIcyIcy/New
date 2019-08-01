@@ -23,9 +23,8 @@ namespace FoodLibrary.Services.Impl
             _loadJsonService = loadJsonService;
             _userFavorService = userFavorService;
             _logService = logService;
-            _logService.InitAsync();
             _foodFavorService = foodFavorService;
-            _foodFavorService.InitAsync();
+            
         }
 
 
@@ -34,8 +33,11 @@ namespace FoodLibrary.Services.Impl
         /// </summary>
         public async void InitRecommendationAsync()
         {
+            
             userFavorInformationList = new List<FoodWeightChange>();
             foodInformationList = await _loadJsonService.ReadJsonAsync();
+            _foodFavorService.InitAsync(foodInformationList);
+            await _logService.InitAsync();
             userFavorInformationList = await _userFavorService.ReadJsonAsync();
             InitWeight(foodInformationList, userFavorInformationList);
             WeatherRoot data = await _weatherService.GetWeatherAsync();
@@ -241,8 +243,8 @@ namespace FoodLibrary.Services.Impl
                 log.FoodName = food_name;
                 log.Date = DateTime.Now;
                 log.WeatherList = new List<int>(2);
-                log.WeatherList[0] = Int32.Parse(weatherStatus.Temperature.ToString());
-                log.WeatherList[1] = Int32.Parse(weatherStatus.Humidity.ToString());
+                log.WeatherList.Add((int)(weatherStatus.Temperature) );
+                log.WeatherList.Add((int) (weatherStatus.Temperature));
                 log.WeightChangeList = reason;
                 _logService.AddLog(log);
                 _foodFavorService.ChangeWeight(pos,reason);
