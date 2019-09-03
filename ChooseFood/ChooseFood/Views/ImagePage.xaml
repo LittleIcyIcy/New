@@ -6,10 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding ImagePageViewModel,Source={StaticResource ViewModelLocator}}"
+    Loaded="Page_Loaded">
 
     <Grid>
-        <TextBlock Text="ImagePage"
-                   FontSize="30"/>
+        <Image Source="{Binding Image}"/>
     </Grid>
 </Page>

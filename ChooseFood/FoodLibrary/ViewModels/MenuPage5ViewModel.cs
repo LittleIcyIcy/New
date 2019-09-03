@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using FoodLibrary.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -19,11 +20,13 @@ namespace FoodLibrary.ViewModels
         /// </summary>
         private IMaintenanceService _maintenanceService;
 
+        private INavigationService _navigationService;
         public MenuPage5ViewModel(IOneDriveService oneDriveService, 
-            IMaintenanceService maintenanceService)
+            IMaintenanceService maintenanceService,INavigationService navigationService)
         {
             _oneDriveService = oneDriveService;
             _maintenanceService = maintenanceService;
+            _navigationService = navigationService;
         }
 
         /// <summary>
@@ -32,9 +35,17 @@ namespace FoodLibrary.ViewModels
         private RelayCommand _logCommand;
         public RelayCommand LogCommand =>
             _logCommand ?? (_logCommand = 
-                new RelayCommand(() => 
+                new RelayCommand(async () => 
                 {
-                    _oneDriveService.SignInAsync();
+                    bool Flag = await _oneDriveService.SignSituationAsync();
+                    if(Flag == false)
+                    {
+                        _oneDriveService.SignInAsync();
+                    }
+                    else
+                    {
+                        //显示已经登陆
+                    }
                 }));
 
         /// <summary>
@@ -43,20 +54,38 @@ namespace FoodLibrary.ViewModels
         private RelayCommand _logoutCommand;
         public RelayCommand LogoutCommand =>
             _logoutCommand ?? (_logoutCommand = 
-                new RelayCommand(() =>
+                new RelayCommand(async () =>
                 {
-                    _oneDriveService.SignOutAsync();
+                    bool Flag = await _oneDriveService.SignSituationAsync();
+                    if(Flag == true)
+                    {
+                        _oneDriveService.SignOutAsync();
+                    }
+                    else
+                    {
+                        //显示还未登录
+                    }
                 }));
-
+        /// <summary>
+        /// 同步按钮绑定。
+        /// </summary>
         private RelayCommand _synCommand;
 
         public RelayCommand SynCommand =>
             _synCommand ?? (_synCommand = 
-                new RelayCommand(() => 
+                new RelayCommand(async () => 
                 {
-                    _maintenanceService.MaintenanceAsync();
-                    _oneDriveService.SaveFoodWeightAsync();
-                    _oneDriveService.SaveLogAsync();
+                    bool Flag = await _oneDriveService.SignSituationAsync();
+                    if(Flag == true)
+                    {
+                        await _maintenanceService.MaintenanceAsync();
+                        _oneDriveService.SaveFoodWeightAsync();
+                        _oneDriveService.SaveLogAsync();
+                    }
+                    else
+                    {
+                        //显示还未登陆，请先登录
+                    }
                 }));
     }
 }

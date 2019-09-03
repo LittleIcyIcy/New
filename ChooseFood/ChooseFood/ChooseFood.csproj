@@ -162,6 +162,28 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Views\cover\timg %281%29.jpg" />
+    <Content Include="Views\cover\timg %2810%29.jpg" />
+    <Content Include="Views\cover\timg %2811%29.jpg" />
+    <Content Include="Views\cover\timg %2812%29.jpg" />
+    <Content Include="Views\cover\timg %2813%29.jpg" />
+    <Content Include="Views\cover\timg %2814%29.jpg" />
+    <Content Include="Views\cover\timg %2815%29.jpg" />
+    <Content Include="Views\cover\timg %2816%29.jpg" />
+    <Content Include="Views\cover\timg %2817%29.jpg" />
+    <Content Include="Views\cover\timg %2818%29.jpg" />
+    <Content Include="Views\cover\timg %2819%29.jpg" />
+    <Content Include="Views\cover\timg %282%29.jpg" />
+    <Content Include="Views\cover\timg %2820%29.jpg" />
+    <Content Include="Views\cover\timg %283%29.jpg" />
+    <Content Include="Views\cover\timg %284%29.jpg" />
+    <Content Include="Views\cover\timg %285%29.jpg" />
+    <Content Include="Views\cover\timg %286%29.jpg" />
+    <Content Include="Views\cover\timg %287%29.jpg" />
+    <Content Include="Views\cover\timg %288%29.jpg" />
+    <Content Include="Views\cover\timg %289%29.jpg" />
+    <Content Include="Views\cover\timg %2821%29.jpg" />
+    <Content Include="Views\cover\timg %2822%29.jpg" />
     <Content Include="Assets\picture\“熊”打滚.jpg" />
     <Content Include="Assets\picture\上海冷面.jpg" />
     <Content Include="Assets\picture\上海小笼包.jpg" />

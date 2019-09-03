@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodLibrary.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace ChooseFood.Views
         public ImagePage()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ImagePageViewModel)DataContext).CoverCommand.Execute(null);
         }
     }
 }

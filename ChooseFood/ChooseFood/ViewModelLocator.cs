@@ -37,6 +37,8 @@ namespace ChooseFood
         public DislikePageViewModel DislikePageViewModel =>
             SimpleIoc.Default.GetInstance<DislikePageViewModel>();
 
+        public ImagePageViewModel ImagePageViewModel =>
+            SimpleIoc.Default.GetInstance<ImagePageViewModel>();
         public ViewModelLocator()
         {
             SimpleIoc.Default.Register<IUserChoiceService, UserChoiceService>();
@@ -60,6 +62,7 @@ namespace ChooseFood
             SimpleIoc.Default.Register<MenuPage5ViewModel>();
             SimpleIoc.Default.Register<LikePageViewModel>();
             SimpleIoc.Default.Register<DislikePageViewModel>();
+            SimpleIoc.Default.Register<ImagePageViewModel>();
         }
     }
 }
