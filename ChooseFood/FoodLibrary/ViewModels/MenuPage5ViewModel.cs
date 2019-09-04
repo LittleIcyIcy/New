@@ -44,7 +44,7 @@ namespace FoodLibrary.ViewModels
                     }
                     else
                     {
-                        //显示已经登陆
+                        _navigationService.NavigateTo("LoginPromptPage","亲，您已经登陆过了呢！");
                     }
                 }));
 
@@ -63,9 +63,10 @@ namespace FoodLibrary.ViewModels
                     }
                     else
                     {
-                        //显示还未登录
+                        _navigationService.NavigateTo("LoginPromptPage", "亲，您还没有登陆呢，这边建议您登一下呢，手动微笑！");
                     }
                 }));
+
         /// <summary>
         /// 同步按钮绑定。
         /// </summary>
@@ -84,7 +85,7 @@ namespace FoodLibrary.ViewModels
                     }
                     else
                     {
-                        //显示还未登陆，请先登录
+                        _navigationService.NavigateTo("LoginPromptPage", "亲，您还没有登陆呢，这边建议您登一下呢，手动微笑！");
                     }
                 }));
     }

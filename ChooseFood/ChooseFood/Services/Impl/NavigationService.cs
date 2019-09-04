@@ -22,7 +22,6 @@ namespace ChooseFood.Services.Impl
 
         public string FoodName() {
             return _foodName;
-
         }
 
         public void SetFrame(Frame frame)
@@ -42,7 +41,8 @@ namespace ChooseFood.Services.Impl
                 ("LikePage",  typeof(LikePage)),
                 ("FirstPage",typeof(FirstPage)),
                 ("ImagePage",typeof(ImagePage)),
-                ("DislikePage",typeof(DislikePage))
+                ("DislikePage",typeof(DislikePage)),
+                ("LoginPromptPage",typeof(LoginPromptPage))
             };
 
         public void NavigateTo(string pageName,string foodName)

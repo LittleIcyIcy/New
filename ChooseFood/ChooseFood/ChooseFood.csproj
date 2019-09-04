@@ -142,6 +142,9 @@
     <Compile Include="Views\LikePage.xaml.cs">
       <DependentUpon>LikePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginPromptPage.xaml.cs">
+      <DependentUpon>LoginPromptPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuPage1.xaml.cs">
       <DependentUpon>MenuPage1.xaml</DependentUpon>
     </Compile>
@@ -175,7 +178,19 @@
     <Content Include="Views\cover\timg %2819%29.jpg" />
     <Content Include="Views\cover\timg %282%29.jpg" />
     <Content Include="Views\cover\timg %2820%29.jpg" />
+    <Content Include="Views\cover\timg %2823%29.jpg" />
+    <Content Include="Views\cover\timg %2824%29.jpg" />
+    <Content Include="Views\cover\timg %2825%29.jpg" />
+    <Content Include="Views\cover\timg %2826%29.jpg" />
+    <Content Include="Views\cover\timg %2827%29.jpg" />
+    <Content Include="Views\cover\timg %2828%29.jpg" />
+    <Content Include="Views\cover\timg %2829%29.jpg" />
     <Content Include="Views\cover\timg %283%29.jpg" />
+    <Content Include="Views\cover\timg %2830%29.jpg" />
+    <Content Include="Views\cover\timg %2831%29.jpg" />
+    <Content Include="Views\cover\timg %2832%29.jpg" />
+    <Content Include="Views\cover\timg %2833%29.jpg" />
+    <Content Include="Views\cover\timg %2834%29.jpg" />
     <Content Include="Views\cover\timg %284%29.jpg" />
     <Content Include="Views\cover\timg %285%29.jpg" />
     <Content Include="Views\cover\timg %286%29.jpg" />
@@ -479,6 +494,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LikePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPromptPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

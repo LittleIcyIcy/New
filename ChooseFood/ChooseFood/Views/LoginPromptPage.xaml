@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="ChooseFood.Views.LoginPromptPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ChooseFood.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding LoginPromptPageViewModel,Source={StaticResource ViewModelLocator}}"
+    Loaded="Page_Loaded">
+
+    <Grid>
+        <Border x:Name="OutBorder" 
+                Background="#55000000" 
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch"/>
+
+        <StackPanel x:Name="ContentGrid" 
+                    Background="White" 
+                    Margin="45,45"
+                    Orientation="Vertical"
+                    VerticalAlignment="Center">
+
+            <Grid Padding="20">
+                <TextBlock x:Name="tbContent"
+                           Text="{Binding PromptContent}"
+                           FontSize="20"
+                           Grid.Row="0" 
+                           TextWrapping="Wrap"  
+                           HorizontalAlignment="Center" />
+            </Grid>
+
+            <Grid Padding="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" 
+                        x:Name="btnLeft" 
+                        Content="确定" 
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        BorderThickness="0" 
+                        Command="{Binding ReturnCommand}"
+                        Background="#f90"
+                        Foreground="White"
+                        MaxWidth="150"/>
+                <Button 
+                    Grid.Column="2" 
+                    x:Name="btnRight" 
+                    Content="取消" 
+                    Command="{Binding ReturnCommand}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center"  
+                    VerticalContentAlignment="Center"
+                    BorderThickness="0"
+                    Background="Gray"
+                    Foreground="BlanchedAlmond"
+                    MaxWidth="150"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>

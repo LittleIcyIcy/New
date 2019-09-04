@@ -26,21 +26,40 @@
                   ItemsSource="{Binding FoodInformationCollection}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Height="400"
-                                Width="800">
+                    <RelativePanel Height="400"
+                                   Width="800">
                         <Image Source="{Binding FoodInformation.FoodImage}"
                                Name="Image"
                                Width="400"
-                               Height="400"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left"/>
-                        <StackPanel Height="400"
-                                    Width="400"
-                                    RelativePanel.RightOf ="Image">
+                               Height="400"/>
+                        <RelativePanel Height="400"
+                                       Width="400"
+                                       RelativePanel.RightOf="Image">
+                            <HyperlinkButton NavigateUri="{Binding FoodInformation.Url}"
+                                             Name="Name"
+                                             Margin="40,40,40,0"
+                                             FontSize="20">
+                                <TextBlock Text="{Binding FoodInformation.Name}"/>
+                            </HyperlinkButton>
                             <TextBlock Text="{Binding FoodInformation.FoodElements}"
-                                       Width="400"/>
-                        </StackPanel>
-                    </StackPanel>
+                                       Width="400"
+                                       Name="ElementBlock"
+                                       RelativePanel.Below="Name"
+                                       Margin="40,0,40,0"
+                                       FontSize="15"/>
+                            <Button Name="Zan"
+                                    Width="80"
+                                    Height="40"
+                                    Margin="40,0,0,0"
+                                    FontSize="15"
+                                    Background="White"
+                                    RelativePanel.Below="ElementBlock"
+                                    Command="{Binding ZanCommand}"
+                                    HorizontalAlignment="Left">
+                                <Image Source="sucai/zan.jpg"/>
+                            </Button>
+                        </RelativePanel>
+                    </RelativePanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
