@@ -53,7 +53,7 @@ namespace FoodLibrary.Services.Impl
             _foodFavorService = foodFavorService;
             var builder = PublicClientApplicationBuilder.Create(OneDriveOAuthSettings.ApplicationId);
             pca = builder.Build();
-
+            int k = 0;
             graphClient = new GraphServiceClient(
                 new DelegateAuthenticationProvider(async (requestMessage) =>
                 {
@@ -61,10 +61,15 @@ namespace FoodLibrary.Services.Impl
                     var result = await pca
                         .AcquireTokenSilent(scopes, accounts.FirstOrDefault())
                         .ExecuteAsync();
+                    k = accounts.Count();
                     requestMessage.Headers.Authorization =
                         new AuthenticationHeaderValue("Bearer",
                             result.AccessToken);
                 }));
+            if(k == 1)
+            {
+                SignOutAsync();
+            }
         }
         /// <summary>
         /// 登录界面
@@ -108,12 +113,19 @@ namespace FoodLibrary.Services.Impl
             try
             {
                 var accounts = await pca.GetAccountsAsync();
+                int k = accounts.Count();
+  
                 if (accounts.Any())
                 {
                     var silentAuthResult = await pca
                         .AcquireTokenSilent(scopes, accounts.FirstOrDefault())
                         .ExecuteAsync();
                     accessToken = silentAuthResult.AccessToken;
+              
+                }
+                if (k == 1)
+                {
+                    return true;
                 }
             }
             catch (MsalUiRequiredException)
@@ -121,7 +133,7 @@ namespace FoodLibrary.Services.Impl
                 return false;
             }
 
-            return true;
+            return false;
         }
         /// <summary>
         /// 保存日志
