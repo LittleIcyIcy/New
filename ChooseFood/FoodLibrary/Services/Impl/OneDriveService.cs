@@ -39,7 +39,8 @@ namespace FoodLibrary.Services.Impl
         private GraphServiceClient graphClient;
         private string _status;
         public event EventHandler StatusChanged;
-
+        public bool flag = false;
+        public bool flagSignIn = false;
         /// <summary>
         /// 云服务初始化
         /// </summary>
@@ -53,7 +54,6 @@ namespace FoodLibrary.Services.Impl
             _foodFavorService = foodFavorService;
             var builder = PublicClientApplicationBuilder.Create(OneDriveOAuthSettings.ApplicationId);
             pca = builder.Build();
-            int k = 0;
             graphClient = new GraphServiceClient(
                 new DelegateAuthenticationProvider(async (requestMessage) =>
                 {
@@ -61,21 +61,18 @@ namespace FoodLibrary.Services.Impl
                     var result = await pca
                         .AcquireTokenSilent(scopes, accounts.FirstOrDefault())
                         .ExecuteAsync();
-                    k = accounts.Count();
                     requestMessage.Headers.Authorization =
                         new AuthenticationHeaderValue("Bearer",
                             result.AccessToken);
                 }));
-            if(k == 1)
-            {
-                SignOutAsync();
-            }
+            
         }
         /// <summary>
         /// 登录界面
         /// </summary>
         public async void SignInAsync()
         {
+            flagSignIn = true;
             try
             {
                 var interactiveRequest = pca.AcquireTokenInteractive(scopes);
@@ -86,7 +83,7 @@ namespace FoodLibrary.Services.Impl
             {
 
             }
-
+            flagSignIn = false;
             return;
 
         }
@@ -109,28 +106,32 @@ namespace FoodLibrary.Services.Impl
         public async Task<bool> SignSituationAsync()
         {
             string accessToken = string.Empty;
-
+            int k;
             try
             {
                 var accounts = await pca.GetAccountsAsync();
-                int k = accounts.Count();
-  
                 if (accounts.Any())
                 {
                     var silentAuthResult = await pca
                         .AcquireTokenSilent(scopes, accounts.FirstOrDefault())
                         .ExecuteAsync();
                     accessToken = silentAuthResult.AccessToken;
-              
                 }
-                if (k == 1)
-                {
-                    return true;
-                }
+                k = accounts.Count();
             }
             catch (MsalUiRequiredException)
             {
                 return false;
+            }
+            if(k == 1 && flag ==false && flagSignIn == true)
+            {
+                flag = true;
+                SignOutAsync();
+                return false;
+            }
+            else if(k == 1)
+            {
+                return true;
             }
 
             return false;
