@@ -10,6 +10,7 @@ namespace FoodLibrary.ViewModels
 {
     public class MenuPage5ViewModel:ViewModelBase
     {
+
         /// <summary>
         /// 登录注销服务。
         /// </summary>

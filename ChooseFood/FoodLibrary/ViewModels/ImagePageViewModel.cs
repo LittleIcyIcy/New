@@ -20,7 +20,7 @@ namespace FoodLibrary.ViewModels
         public RelayCommand CoverCommand => _coverCommand ??
             (_coverCommand = new RelayCommand(() => {
                 Random run = new Random();
-                int RandomKey = run.Next(1, 34);
+                int RandomKey = run.Next(1, 50);
                 Image = "cover/timg (" + Convert.ToString(RandomKey) + ").jpg";
             }));
     }

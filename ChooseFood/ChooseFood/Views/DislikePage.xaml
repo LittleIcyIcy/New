@@ -25,7 +25,8 @@
                    VerticalAlignment="Center"
                    FontSize="25"
                    Margin="-200,0,0,0"/>
-        <Button Background="White" 
+        <Button Background="White"
+                Foreground="{Binding Color1}"
                 Grid.Row="1"
                 Name="FirstButton"
                 Height="50"
@@ -35,13 +36,14 @@
                 Content="&#xE208;"
                 FontSize="25"
                 Command="{Binding FirstCommand}"
+                Visibility="Visible"
         />
         <TextBlock Grid.Row="1"
                    Text="是今天太冷了吗？"
                    VerticalAlignment="Center"
                    Margin="350,0,0,0"
                    FontSize="20"/>
-        <Button Background="White" 
+        <Button Background="{Binding Color2}" 
                 Grid.Row="2"
                 Name="SecondButton"
                 Height="50"
@@ -57,7 +59,7 @@
                    VerticalAlignment="Center"
                    Margin="350,0,0,0"
                    FontSize="20"/>
-        <Button Background="White" 
+        <Button Background="{Binding Color3}" 
                 Grid.Row="3"
                 Name="ThirdButton"
                 Height="50"
@@ -73,7 +75,7 @@
                    VerticalAlignment="Center"
                    Margin="350,0,0,0"
                    FontSize="20"/>
-        <Button Background="White" 
+        <Button Background="{Binding Color4}" 
                 Grid.Row="4"
                 Name="ForthButton"
                 Height="50"
@@ -89,7 +91,7 @@
                    VerticalAlignment="Center"
                    Margin="350,0,0,0"
                    FontSize="20"/>
-        <Button Background="White" 
+        <Button Background="{Binding Color5}" 
                 Grid.Row="5"
                 Name="FifthButton"
                 Height="50"

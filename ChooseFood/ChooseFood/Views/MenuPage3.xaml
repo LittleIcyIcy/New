@@ -29,9 +29,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <RelativePanel>
+                        <Image Source="{Binding FoodImage}"
+                               Width="100"
+                               Height="100"
+                               Name="Image"
+                               Margin="100,0,0,0"/>
                         <HyperlinkButton NavigateUri="{Binding Url}"
-                                         x:Name="NameBlock"
-                                         Width="80">
+                                         Name="NameBlock"
+                                         Width="80"
+                                         RelativePanel.RightOf="Image">
                             <TextBlock Text="{Binding Name}"/>
                         </HyperlinkButton>
                         <TextBlock Text="{Binding FoodElements}"

@@ -37,26 +37,34 @@
                                        RelativePanel.RightOf="Image">
                             <HyperlinkButton NavigateUri="{Binding FoodInformation.Url}"
                                              Name="Name"
-                                             Margin="40,40,40,0"
-                                             FontSize="20">
+                                             FontSize="20"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top">
                                 <TextBlock Text="{Binding FoodInformation.Name}"/>
                             </HyperlinkButton>
                             <TextBlock Text="{Binding FoodInformation.FoodElements}"
                                        Width="400"
                                        Name="ElementBlock"
                                        RelativePanel.Below="Name"
-                                       Margin="40,0,40,0"
                                        FontSize="15"/>
                             <Button Name="Zan"
-                                    Width="80"
+                                    Width="40"
                                     Height="40"
-                                    Margin="40,0,0,0"
                                     FontSize="15"
                                     Background="White"
                                     RelativePanel.Below="ElementBlock"
                                     Command="{Binding ZanCommand}"
                                     HorizontalAlignment="Left">
                                 <Image Source="sucai/zan.jpg"/>
+                            </Button>
+                            <Button Name="Cai"
+                                    Height="40"
+                                    Width="40"
+                                    Background="White"
+                                    RelativePanel.Below="ElementBlock"
+                                    RelativePanel.RightOf="Zan"
+                                    Command="{Binding CaiCommand}">
+                                <Image Source="sucai/cai.jpg"/>
                             </Button>
                         </RelativePanel>
                     </RelativePanel>

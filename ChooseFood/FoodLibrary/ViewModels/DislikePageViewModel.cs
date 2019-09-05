@@ -9,6 +9,12 @@ namespace FoodLibrary.ViewModels
 {
     public class DislikePageViewModel:ViewModelBase
     {
+        private string _color1 = "White";
+        private string _color2 = "White";
+        private string _color3 = "White";
+        private string _color4 = "White";
+        private string _color5 = "White";
+
         private INavigationService _navigationService;
 
         private IRecommendationService _recommendationService;
@@ -18,6 +24,36 @@ namespace FoodLibrary.ViewModels
         {
             _navigationService = navigationService;
             _recommendationService = recommendationService;
+        }
+
+        public string Color1
+        {
+            get => _color1;
+            set => Set(nameof(Color1), ref _color1, value);
+        }
+
+        public string Color2
+        {
+            get => _color2;
+            set => Set(nameof(Color2), ref _color2, value);
+        }
+
+        public string Color3
+        {
+            get => _color3;
+            set => Set(nameof(Color3), ref _color3, value);
+        }
+
+        public string Color4
+        {
+            get => _color4;
+            set => Set(nameof(Color4), ref _color4, value);
+        }
+
+        public string Color5
+        {
+            get => _color5;
+            set => Set(nameof(Color5), ref _color5, value);
         }
 
         private string _foodName;
@@ -49,27 +85,28 @@ namespace FoodLibrary.ViewModels
             _firstCommand ?? (_firstCommand =
                 new RelayCommand(() =>
                 {
-                    if (_reasonList[0] == 0)
-                    {
-                        _reasonList[0] = -1;
-                        if (flag == -1)
-                        {
-                            flag = 0;
-                            //改变没有原因的那个button的颜色
-                        }
+                    //if (_reasonList[0] == 0)
+                    //{
+                    //    _reasonList[0] = -1;
+                    //    if (flag == -1)
+                    //    {
+                    //        flag = 0;
+                    //        _color5 = "White";
+                    //    }
 
-                        if (_reasonList[2] == -1)
-                        {
-                            _reasonList[2] = 0;
-                            //改变这个按钮颜色
-                        }
-                        //改变按钮颜色
-                    }
-                    else
-                    {
-                        _reasonList[0] = 0;
-                        //改变按钮颜色
-                    }
+                    //    if (_reasonList[2] == -1)
+                    //    {
+                    //        _reasonList[2] = 0;
+                    //        _color2 = "White";
+                    //    }
+                    //    _color1 = "Black";
+                    //}
+                    //else
+                    //{
+                    //    _reasonList[0] = 0;
+                    //    _color1 = "White";
+                    //}
+                    _color1 = "Black";
                 }));
 
         public RelayCommand SecondCommand =>
@@ -82,20 +119,20 @@ namespace FoodLibrary.ViewModels
                         if (flag == -1)
                         {
                             flag = 0;
-                            //改变没有原因的那个button的颜色
+                            _color5 = "White";
                         }
 
                         if (_reasonList[0] == -1)
                         {
                             _reasonList[0] = 0;
-                            //改变这个按钮颜色
+                            _color1 = "White";
                         }
-                        //改变按钮颜色
+                        _color2 = "CadetBlue";
                     }
                     else
                     {
                         _reasonList[2] = 0;
-                        //改变按钮颜色
+                        _color2 = "White";
                     }
                 }));
 
@@ -109,20 +146,20 @@ namespace FoodLibrary.ViewModels
                         if (flag == -1)
                         {
                             flag = 0;
-                            //改变没有原因的那个button的颜色
+                            _color5 = "White";
                         }
 
                         if (_reasonList[3] == -1)
                         {
                             _reasonList[3] = 0;
-                            //改变这个按钮颜色
+                            _color4 = "White";
                         }
-                        //改变按钮颜色
+                        _color3 = "CadetBlue";
                     }
                     else
                     {
                         _reasonList[5] = 0;
-                        //改变按钮颜色
+                        _color3 = "White";
                     }
                 }));
 
@@ -136,20 +173,20 @@ namespace FoodLibrary.ViewModels
                         if (flag == 1)
                         {
                             flag = 0;
-                            //改变没有原因的那个button的颜色
+                            _color5 = "White";
                         }
 
                         if (_reasonList[5] == -1)
                         {
                             _reasonList[5] = 0;
-                            //改变这个按钮颜色
+                            _color3 = "White";
                         }
-                        //改变按钮颜色
+                        _color4 = "CadetBlue";
                     }
                     else
                     {
                         _reasonList[3] = 0;
-                        //改变按钮颜色
+                        _color3 = "White";
                     }
                 }));
 
@@ -164,7 +201,7 @@ namespace FoodLibrary.ViewModels
                             _reasonList[i] = -1;
                         }
                         flag = 1;
-                        //改变按钮颜色
+                        _color5 = "CadetBlue";
                     }
                     else
                     {
@@ -173,7 +210,10 @@ namespace FoodLibrary.ViewModels
                             _reasonList[i] = 0;
                         }
                         flag = 0;
-                        //改变按钮颜色
+                        if (_color1 == "CadetBlue") { _color1 = "White"; }
+                        if (_color2 == "CadetBlue") { _color2 = "White"; }
+                        if (_color3 == "CadetBlue") { _color3 = "White"; }
+                        if (_color4 == "CadetBlue") { _color4 = "White"; }
                     }
                 }));
 
