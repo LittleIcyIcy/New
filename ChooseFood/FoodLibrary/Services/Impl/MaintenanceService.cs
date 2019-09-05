@@ -76,6 +76,7 @@ namespace FoodLibrary.Services.Impl
                 ChangeInformation cloudChangeInfList = GetChangeInf(cloudLog, lastCommitTime, FoodName);
 
                 ChangeInformation localChangeInfList = GetChangeInf(localLog, lastCommitTime, FoodName);
+
                 int[] arr = { 0, 0, 0, 0, 0, 0 };
                 List<int> tmpWeightChangeList = totalWeight[i].weightChangeList;
                 for (int j = 0; j < 9; j++)
@@ -200,7 +201,7 @@ namespace FoodLibrary.Services.Impl
 
                 else if (foodName == cloudLog[i].FoodName)
                 {
-                    int changePos = 3 * cloudLog[i].WeatherList[0] + cloudLog[i].WeatherList[0];
+                    int changePos = 3 * cloudLog[i].WeatherList[0] + cloudLog[i].WeatherList[1];
                     for (int j = 0; j < 6; j++)
                     {
                         changeInf.Weight[changePos][j] =

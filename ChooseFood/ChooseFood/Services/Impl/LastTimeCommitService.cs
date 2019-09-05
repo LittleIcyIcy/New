@@ -24,7 +24,8 @@ namespace ChooseFood.Services.Impl
 
                     String text = await Windows.Storage.FileIO.ReadTextAsync(sampleFile);
 
-                    dateTime = JsonMapper.ToObject<DateTime>(text);
+                    var dt = JsonMapper.ToObject<List<DateTime>>(text);
+                    dateTime = dt[0];
                 }
                 catch (Exception ex)
                 {
@@ -39,7 +40,9 @@ namespace ChooseFood.Services.Impl
         /// <param name="userChoice"></param>
         public async void SaveJsonAsync(DateTime lastDateTime)
         {
-            String json = JsonConvert.SerializeObject(lastDateTime);
+            List<DateTime> dt = new List<DateTime>();
+            dt.Add(lastDateTime);
+            String json = JsonConvert.SerializeObject(dt);
             try
             {
                 Windows.Storage.StorageFolder storageFolder =
