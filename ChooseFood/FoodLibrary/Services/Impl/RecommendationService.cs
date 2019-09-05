@@ -226,12 +226,13 @@ namespace FoodLibrary.Services.Impl
                 if (reason[i] > 0)
                 {
                     foodInformationList[pos].Weight[i] =
-                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (4 / 3) ^ reason[i])));
+                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (Math.Pow(4, reason[i]) / (Math.Pow(3, reason[i]))))));
                 }
                 else if (reason[i] < 0)
                 {
+                    int absNum = Math.Abs(reason[i]);
                     foodInformationList[pos].Weight[i] =
-                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (3 / 4) ^ (Math.Abs(reason[i])))));
+                        Convert.ToInt32(Math.Ceiling(Convert.ToDouble(foodInformationList[pos].Weight[i] * (Math.Pow(3, absNum) / (Math.Pow(4, absNum))))));
 
                 }
 

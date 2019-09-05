@@ -76,7 +76,7 @@ namespace FoodLibrary.Services.Impl
 
                 ChangeInformation localChangeInfList = GetChangeInf(localLog, lastCommitTime, FoodName);
                 int[] arr = { 0, 0, 0, 0, 0, 0 };
-                List<int> tmpWeightChangeList = new List<int>(arr);
+                List<int> tmpWeightChangeList = foodInformationList[i].Weight;
                 for (int j = 0; j < 9; j++)
                 {
                     int flag = 0;
@@ -116,7 +116,7 @@ namespace FoodLibrary.Services.Impl
                                     cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
                                     flag = 1;
                                 }
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k] ;
                             }
                         }
                         else
@@ -126,7 +126,7 @@ namespace FoodLibrary.Services.Impl
                                 cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
                                 flag = 1;
                             }
-                            tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
+                            tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k] + cloudChangeInfList.Weight[j][k];
                         }
                     }
                 }
@@ -141,7 +141,7 @@ namespace FoodLibrary.Services.Impl
         }
 
 
-        private List<Log> InsertRecord(List<Log> cloudLog, List<Log> localLog, string foodName, DateTime lastCommitTime)
+        public List<Log> InsertRecord(List<Log> cloudLog, List<Log> localLog, string foodName, DateTime lastCommitTime)
         {
             int i = 0;
             while (i < localLog.Count)
@@ -154,11 +154,11 @@ namespace FoodLibrary.Services.Impl
                 i++;
             }
 
-            cloudLog.OrderBy(log => log.Date);
+            cloudLog = cloudLog.OrderBy(log => log.Date).ToList();
             return cloudLog;
         }
 
-        private List<Log> DeleteRecord(List<Log> cloudLog, string foodName, DateTime lastCommitTime)
+        public List<Log> DeleteRecord(List<Log> cloudLog, string foodName, DateTime lastCommitTime)
         {
             int i = 0;
             while (i < cloudLog.Count)
