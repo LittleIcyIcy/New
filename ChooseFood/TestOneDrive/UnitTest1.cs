@@ -366,7 +366,7 @@ namespace Tests
                 mockFoodFavorService);
             await maintenanceService.MaintenanceAsync();
         }
-        //测试维护同步系统2
+        //测试维护同步系统同步2
         [Test]
         public async System.Threading.Tasks.Task Test12Async()
         {
@@ -459,7 +459,7 @@ namespace Tests
                 mockFoodFavorService);
             await maintenanceService.MaintenanceAsync();
         }
-        //测试维护同步系统3
+        //测试维护同步系统同步3
         [Test]
         public async System.Threading.Tasks.Task Test13Async()
         {
@@ -552,7 +552,7 @@ namespace Tests
                 mockFoodFavorService);
             await maintenanceService.MaintenanceAsync();
         }
-        //测试日志系统
+        //测试日志系统的读写操作
         [Test]
         public async System.Threading.Tasks.Task Test5Async()
         {

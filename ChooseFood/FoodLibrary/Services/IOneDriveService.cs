@@ -10,7 +10,7 @@ namespace FoodLibrary.Services
     {
         void SignInAsync();
         void SignOutAsync();
-        Task<bool> SignSituationAsync();
+        Task<bool> SignSituationAsync(bool flagSignIn);
         void SaveLogAsync();
         Task<List<Log>> LoadLogAsync();
         void SaveFoodWeightAsync();

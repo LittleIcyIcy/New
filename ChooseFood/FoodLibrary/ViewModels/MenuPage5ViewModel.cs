@@ -38,7 +38,7 @@ namespace FoodLibrary.ViewModels
             _logCommand ?? (_logCommand = 
                 new RelayCommand(async () => 
                 {
-                    bool Flag = await _oneDriveService.SignSituationAsync();
+                    bool Flag = await _oneDriveService.SignSituationAsync(true);
                     if(Flag == false)
                     {
                         _oneDriveService.SignInAsync();
@@ -57,7 +57,7 @@ namespace FoodLibrary.ViewModels
             _logoutCommand ?? (_logoutCommand = 
                 new RelayCommand(async () =>
                 {
-                    bool Flag = await _oneDriveService.SignSituationAsync();
+                    bool Flag = await _oneDriveService.SignSituationAsync(false);
                     if(Flag == true)
                     {
                         _oneDriveService.SignOutAsync();
@@ -77,7 +77,7 @@ namespace FoodLibrary.ViewModels
             _synCommand ?? (_synCommand = 
                 new RelayCommand(async () => 
                 {
-                    bool Flag = await _oneDriveService.SignSituationAsync();
+                    bool Flag = await _oneDriveService.SignSituationAsync(false);
                     if(Flag == true)
                     {
                         await _maintenanceService.MaintenanceAsync();
