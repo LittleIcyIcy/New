@@ -131,8 +131,9 @@ namespace FoodLibrary.Services.Impl
                 flag = true;
                 return false;
             }
-            if(k == 1)
+            if(k == 1 && flag == false)
             {
+                flag = true;
                 return true;
             }
 
