@@ -40,7 +40,6 @@ namespace FoodLibrary.Services.Impl
         private string _status;
         public event EventHandler StatusChanged;
         public bool flag = false;
-        public bool flagSignIn = false;
         /// <summary>
         /// 云服务初始化
         /// </summary>
@@ -72,7 +71,6 @@ namespace FoodLibrary.Services.Impl
         /// </summary>
         public async void SignInAsync()
         {
-            flagSignIn = true;
             try
             {
                 var interactiveRequest = pca.AcquireTokenInteractive(scopes);
@@ -83,7 +81,6 @@ namespace FoodLibrary.Services.Impl
             {
 
             }
-            flagSignIn = false;
             return;
 
         }
@@ -103,7 +100,7 @@ namespace FoodLibrary.Services.Impl
         /// 检查现在的登陆状态
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> SignSituationAsync()
+        public async Task<bool> SignSituationAsync(bool flagSignIn)
         {
             string accessToken = string.Empty;
             int k;
@@ -129,7 +126,12 @@ namespace FoodLibrary.Services.Impl
                 SignOutAsync();
                 return false;
             }
-            else if(k == 1)
+            else if(k == 0 & flag == false && flagSignIn == true)
+            {
+                flag = true;
+                return false;
+            }
+            if(k == 1)
             {
                 return true;
             }

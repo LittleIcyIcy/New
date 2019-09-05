@@ -66,6 +66,7 @@ namespace FoodLibrary.Services.Impl
                     totalWeight.Add(foodWeightChange);
                 }
             }
+            // bug
             var foodInformationList = _recommendationService.GetFoodInfs();
 
             for (int i = 0; i < foodInformationList.Count; i++)
@@ -76,7 +77,7 @@ namespace FoodLibrary.Services.Impl
 
                 ChangeInformation localChangeInfList = GetChangeInf(localLog, lastCommitTime, FoodName);
                 int[] arr = { 0, 0, 0, 0, 0, 0 };
-                List<int> tmpWeightChangeList = foodInformationList[i].Weight;
+                List<int> tmpWeightChangeList = totalWeight[i].weightChangeList;
                 for (int j = 0; j < 9; j++)
                 {
                     int flag = 0;
@@ -86,7 +87,8 @@ namespace FoodLibrary.Services.Impl
                         {
                             if (cloudChangeInfList.Weight[j][k] >= localChangeInfList.Weight[j][k])
                             {
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + cloudChangeInfList.Weight[j][k];
+                                //tmpWeightChangeList[k] = tmpWeightChangeList[k] + cloudChangeInfList.Weight[j][k];
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k];
                                 continue;
                             }
                             else if (cloudChangeInfList.Weight[j][k] < localChangeInfList.Weight[j][k])
@@ -97,7 +99,7 @@ namespace FoodLibrary.Services.Impl
                                     cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
                                     flag = 1;
                                 }
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] - cloudChangeInfList.Weight[j][k] + localChangeInfList.Weight[j][k];
                             }
                         }
 
@@ -105,7 +107,7 @@ namespace FoodLibrary.Services.Impl
                         {
                             if (cloudChangeInfList.Weight[j][k] <= localChangeInfList.Weight[j][k])
                             {
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + cloudChangeInfList.Weight[j][k];
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k];
                                 continue;
                             }
                             else if (cloudChangeInfList.Weight[j][k] > localChangeInfList.Weight[j][k])
@@ -116,7 +118,7 @@ namespace FoodLibrary.Services.Impl
                                     cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
                                     flag = 1;
                                 }
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k] ;
+                                tmpWeightChangeList[k] = tmpWeightChangeList[k] -cloudChangeInfList.Weight[j][k]+ localChangeInfList.Weight[j][k] ;
                             }
                         }
                         else
@@ -126,7 +128,7 @@ namespace FoodLibrary.Services.Impl
                                 cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
                                 flag = 1;
                             }
-                            tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k] + cloudChangeInfList.Weight[j][k];
+                            tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
                         }
                     }
                 }
