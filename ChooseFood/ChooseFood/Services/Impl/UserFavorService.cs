@@ -25,6 +25,7 @@ namespace ChooseFood.Services.Impl
                     Windows.Storage.ApplicationData.Current.LocalFolder;
                 try
                 {
+
                     Windows.Storage.StorageFile sampleFile = await storageFolder.GetFileAsync("user_favor.json");
 
                     String text = await Windows.Storage.FileIO.ReadTextAsync(sampleFile);

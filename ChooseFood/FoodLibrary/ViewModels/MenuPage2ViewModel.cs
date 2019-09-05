@@ -33,7 +33,9 @@ namespace FoodLibrary.ViewModels
             _showCommand ?? (_showCommand = 
                 new RelayCommand(() => {
                     HistoricFoodInformationsCollection.Clear();
-                    HistoricFoodInformationsCollection.AddRange(_logService.GetLogs());
+                    var temp = _logService.GetLogs();
+                    if(temp.Count != 0)
+                        HistoricFoodInformationsCollection.AddRange(_logService.GetLogs());
                 }));
         private RelayCommand _showCommand;
 

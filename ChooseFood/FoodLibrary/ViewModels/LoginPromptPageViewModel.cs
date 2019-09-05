@@ -34,7 +34,7 @@ namespace FoodLibrary.ViewModels
         public RelayCommand ReturnCommand => _returnCommand ??
             (_returnCommand = new RelayCommand(() =>
             {
-                _navigationService.NavigateTo("数据同步", null);
+                _navigationService.NavigateTo("今日推荐", null);
             }));
 
         /// <summary>

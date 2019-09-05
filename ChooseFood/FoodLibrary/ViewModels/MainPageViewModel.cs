@@ -10,6 +10,16 @@ namespace FoodLibrary.ViewModels
     public class MainPageViewModel:ViewModelBase
     {
         /// <summary>
+        /// 登录注销服务。
+        /// </summary>
+        private IOneDriveService _oneDriveService;
+
+        /// <summary>
+        /// 数据同步服务。
+        /// </summary>
+        private IMaintenanceService _maintenanceService;
+
+        /// <summary>
         /// 位置服务。
         /// </summary>
         private ILocationService _locationService;
@@ -23,6 +33,7 @@ namespace FoodLibrary.ViewModels
         /// 推荐服务。
         /// </summary>
         private IRecommendationService _recommendationService;
+
         /// <summary>
         /// 所有的天气数据。
         /// </summary>
@@ -71,12 +82,15 @@ namespace FoodLibrary.ViewModels
         public MainPageViewModel(ILocationService locationService,
             IWeatherService weatherService,
             IRecommendationService recommendationService,
-            INavigationService navigationService)
+            INavigationService navigationService,IOneDriveService oneDriveService,
+            IMaintenanceService maintenanceService)
         {
             _locationService = locationService;
             _weatherService = weatherService;
             _navigationService = navigationService;
             _recommendationService = recommendationService;
+            _oneDriveService = oneDriveService;
+            _maintenanceService = maintenanceService;
         }
 
         public Weather WeatherRoot;
@@ -107,7 +121,6 @@ namespace FoodLibrary.ViewModels
 
 
         private RelayCommand _toFirstCommand;
-
         public RelayCommand ToFirstCommand =>
             _toFirstCommand ?? (_toFirstCommand = 
                 new RelayCommand(() => {
@@ -116,5 +129,64 @@ namespace FoodLibrary.ViewModels
                     _navigationService.NavigateTo("ImagePage",null);
                 }));
 
+        /// <summary>
+        /// 登录按钮绑定。
+        /// </summary>
+        private RelayCommand _logCommand;
+        public RelayCommand LogCommand =>
+            _logCommand ?? (_logCommand =
+                new RelayCommand(async () =>
+                {
+                    bool Flag = await _oneDriveService.SignSituationAsync(true);
+                    if (Flag == false)
+                    {
+                        _oneDriveService.SignInAsync();
+                    }
+                    else
+                    {
+                        _navigationService.NavigateTo("LoginPromptPage", "亲，您已经登陆过了呢！");
+                    }
+                }));
+
+        /// <summary>
+        /// 注销按钮绑定。
+        /// </summary>
+        private RelayCommand _logoutCommand;
+        public RelayCommand LogoutCommand =>
+            _logoutCommand ?? (_logoutCommand =
+                new RelayCommand(async () =>
+                {
+                    bool Flag = await _oneDriveService.SignSituationAsync(false);
+                    if (Flag == true)
+                    {
+                        _oneDriveService.SignOutAsync();
+                    }
+                    else
+                    {
+                        _navigationService.NavigateTo("LoginPromptPage", "亲，您还没有登陆呢，这边建议您登一下呢，手动微笑！");
+                    }
+                }));
+
+        /// <summary>
+        /// 同步按钮绑定。
+        /// </summary>
+        private RelayCommand _synCommand;
+        public RelayCommand SynCommand =>
+            _synCommand ?? (_synCommand =
+                new RelayCommand(async () =>
+                {
+                    bool Flag = await _oneDriveService.SignSituationAsync(false);
+                    if (Flag == true)
+                    {
+                        await _maintenanceService.MaintenanceAsync();
+                        _oneDriveService.SaveFoodWeightAsync();
+                        _oneDriveService.SaveLogAsync();
+                        //加一个同步成功的窗口
+                    }
+                    else
+                    {
+                        _navigationService.NavigateTo("LoginPromptPage", "亲，您还没有登陆呢，这边建议您登一下呢，手动微笑！");
+                    }
+                }));
     }
 }

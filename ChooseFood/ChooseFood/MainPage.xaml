@@ -33,39 +33,56 @@
                                     Tag="MenuPage4"
                                     Icon="Setting"
                                     FontSize="18"/>
-                <NavigationViewItem Content="数据同步"
-                                    Tag="MenuPage5"
-                                    Icon="save"
-                                    FontSize="18"/>
             </NavigationView.MenuItems>
             <NavigationView.PaneFooter >
-                <RelativePanel Height="100">
-                    <Image VerticalAlignment="Top"
-                           Name="WeatherPicture"
-                           Source="Assets/LockScreenLogo.png"
-                           HorizontalAlignment="Left"
-                    />
-                    <TextBlock Text="{Binding Temperature,Mode=TwoWay}"
-                           MaxHeight="50"
-                           x:Name="Tempratrue"
-                           RelativePanel.RightOf="WeatherPicture"
-                           Margin="10,0,58,-35"
-                           FontSize="20" 
-                           Width="51"/>
-                    <TextBlock Text="{Binding Humidity}"
-                           MaxHeight="50"
-                           Width="51"
-                           x:Name="Humidity"
-                           RelativePanel.RightOf="Tempratrue"
-                           Margin="-40,0,0,-35"
-                           FontSize="20"/>
-                    <TextBlock Text="{Binding Site}"
-                           MaxHeight="50"
-                           Width="51"
-                           RelativePanel.RightOf="Humidity"
-                           Margin="20,0,0,-35"
-                           FontSize="20"/>
-                </RelativePanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <RelativePanel Name="Weather"
+                                   Grid.Column="1"
+                                   Height="50"
+                                   HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding Temperature}"
+                                   MaxHeight="50"
+                                   x:Name="Tempratrue"
+                                   FontSize="20" 
+                                   Width="51"/>
+                        <TextBlock Text="{Binding Humidity}"
+                               MaxHeight="50"
+                               Width="51"
+                               x:Name="Humidity"
+                               RelativePanel.Below="Tempratrue"
+                               FontSize="20"/>
+                        <TextBlock Text="{Binding Site}"
+                               MaxHeight="50"
+                               Width="51"
+                               RelativePanel.Below="Humidity"
+                               FontSize="20"/>
+                    </RelativePanel>
+                    <RelativePanel x:Name="Person"
+                                   Grid.Column="0"
+                                   RelativePanel.Below="Weather"
+                                   VerticalAlignment="Bottom"
+                                   Height="150"
+                                   Margin="0,0,0,-40">
+                        <Button Content="登陆"
+                                Name="LogIn"
+                                FontSize="20"
+                                Command="{Binding LogCommand}"/>
+                        <Button Content="同步"
+                                Name="Synchronization"
+                                RelativePanel.Below="LogIn"
+                                FontSize="20"
+                                Command="{Binding SynCommand}"/>
+                        <Button Content="注销"
+                                Name="Logout"
+                                RelativePanel.Below="Synchronization"
+                                FontSize="20"
+                                Command="{Binding LogoutCommand}"/>
+                    </RelativePanel>
+                </Grid>
             </NavigationView.PaneFooter>
             <NavigationView.Header>
                 今天吃点啥
