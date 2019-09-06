@@ -475,6 +475,7 @@
     <None Include="Assets\picture\.DS_Store" />
     <Content Include="Assets\test_data_new.json" />
     <None Include="ChooseFood_TemporaryKey.pfx" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\sucai\refresh.png" />

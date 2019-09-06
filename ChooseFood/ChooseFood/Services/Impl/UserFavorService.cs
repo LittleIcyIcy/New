@@ -38,6 +38,10 @@ namespace ChooseFood.Services.Impl
                 }
 
             });
+            if (userChoiceInformation == null)
+            {
+                userChoiceInformation = new List<FoodWeightChange>();
+            }
             return userChoiceInformation;
         }
 
