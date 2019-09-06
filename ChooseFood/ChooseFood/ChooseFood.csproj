@@ -162,6 +162,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\leave.jpg" />
+    <Content Include="Assets\background.jpg" />
     <Content Include="Views\cover\timg %281%29.jpg" />
     <Content Include="Views\cover\timg %2810%29.jpg" />
     <Content Include="Views\cover\timg %2811%29.jpg" />

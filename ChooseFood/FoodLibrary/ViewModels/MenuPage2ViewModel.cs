@@ -24,18 +24,18 @@ namespace FoodLibrary.ViewModels
         /// <summary>
         /// 历史记录。
         /// </summary>
-        public ObservableRangeCollection<Log> HistoricFoodInformationsCollection {
-            get;
-        } = 
-            new ObservableRangeCollection<Log>();
+        public ObservableRangeCollection<Log> HistoricFoodInformationsCollection
+            {get;} = new ObservableRangeCollection<Log>();
 
         public RelayCommand ShowCommand =>
             _showCommand ?? (_showCommand = 
                 new RelayCommand(() => {
                     HistoricFoodInformationsCollection.Clear();
-                    var temp = _logService.GetLogs();
+                    List<Log> temp = new List<Log>(_logService.GetLogs());
                     if(temp.Count != 0)
-                        HistoricFoodInformationsCollection.AddRange(_logService.GetLogs());
+                    {
+                        HistoricFoodInformationsCollection.AddRange(temp);
+                    }
                 }));
         private RelayCommand _showCommand;
 

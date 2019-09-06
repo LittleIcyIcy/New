@@ -31,5 +31,30 @@ namespace ChooseFood.Views
         private void LikePage_OnLoaded(object sender, RoutedEventArgs e) {
             ((LikePageViewModel) DataContext).ReceiveFoodNameCommand.Execute(null);
         }
+
+        private void One_Checked(object sender, RoutedEventArgs e)
+        {
+            ((LikePageViewModel)DataContext).FirstCheckCommand.Execute(null);
+        }
+
+        private void Two_Checked(object sender, RoutedEventArgs e)
+        {
+            ((LikePageViewModel)DataContext).SecondCheckCommand.Execute(null);
+        }
+
+        private void Three_Checked(object sender, RoutedEventArgs e)
+        {
+            ((LikePageViewModel)DataContext).ThirdCheckCommand.Execute(null);
+        }
+
+        private void Four_Checked(object sender, RoutedEventArgs e)
+        {
+            ((LikePageViewModel)DataContext).ForthCheckCommand.Execute(null);
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ((LikePageViewModel)DataContext).FifthCheckCommand.Execute(null);
+        }
     }
 }

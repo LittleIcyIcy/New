@@ -85,28 +85,27 @@ namespace FoodLibrary.ViewModels
             _firstCommand ?? (_firstCommand =
                 new RelayCommand(() =>
                 {
-                    //if (_reasonList[0] == 0)
-                    //{
-                    //    _reasonList[0] = -1;
-                    //    if (flag == -1)
-                    //    {
-                    //        flag = 0;
-                    //        _color5 = "White";
-                    //    }
+                    if (_reasonList[0] == 0)
+                    {
+                        _reasonList[0] = -1;
+                        if (flag == -1)
+                        {
+                            flag = 0;
+                            _color5 = "White";
+                        }
 
-                    //    if (_reasonList[2] == -1)
-                    //    {
-                    //        _reasonList[2] = 0;
-                    //        _color2 = "White";
-                    //    }
-                    //    _color1 = "Black";
-                    //}
-                    //else
-                    //{
-                    //    _reasonList[0] = 0;
-                    //    _color1 = "White";
-                    //}
-                    _color1 = "Black";
+                        if (_reasonList[2] == -1)
+                        {
+                            _reasonList[2] = 0;
+                            _color2 = "White";
+                        }
+                        _color1 = "Black";
+                    }
+                    else
+                    {
+                        _reasonList[0] = 0;
+                        _color1 = "White";
+                    }
                 }));
 
         public RelayCommand SecondCommand =>
@@ -229,6 +228,7 @@ namespace FoodLibrary.ViewModels
                     List<int> reasonList = new List<int>(_reasonList);
                     _recommendationService.ChangeWeight(_foodName, reasonList, true);
                     _navigationService.NavigateTo("今日推荐", null);
+                    foreach (int i in _reasonList) _reasonList[i] = 0;
                 }));
     }
 }
