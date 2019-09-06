@@ -79,6 +79,14 @@ namespace FoodLibrary.ViewModels
         }
         private string _site;
 
+        private int flag = -1;
+
+        public int JudgeState()
+        {
+            flag++;
+            return flag;
+        }
+
         public MainPageViewModel(ILocationService locationService,
             IWeatherService weatherService,
             IRecommendationService recommendationService,
@@ -163,7 +171,8 @@ namespace FoodLibrary.ViewModels
                     }
                     else
                     {
-                        _navigationService.NavigateTo("LoginPromptPage", "亲，您还没有登陆呢，这边建议您登一下呢，手动微笑！");
+
+                        //_navigationService.NavigateTo("LoginPromptPage", "亲，您还没有登陆呢，这边建议您登一下呢，手动微笑！");
                     }
                 }));
 

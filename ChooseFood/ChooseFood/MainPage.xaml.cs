@@ -16,6 +16,7 @@ using ChooseFood.Services.Impl;
 using FoodLibrary.Services;
 using FoodLibrary.ViewModels;
 using GalaSoft.MvvmLight.Ioc;
+using ChooseFood.Views;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -41,8 +42,15 @@ namespace ChooseFood
 
         private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
         {
+            int m = ((MainPageViewModel)DataContext).JudgeState();
+            if (m == 0)
+            {
+                PopupNotice popupNotice = new PopupNotice("正在加载天气等信息，请稍等呢，亲！");
+                popupNotice.ShowAPopup();
+            }
             ((MainPageViewModel)DataContext).ToFirstCommand.Execute(null);
-
         }
+
+
     }
 }

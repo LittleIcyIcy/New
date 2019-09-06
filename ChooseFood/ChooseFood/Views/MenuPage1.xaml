@@ -39,7 +39,8 @@
                                              Name="Name"
                                              FontSize="20"
                                              HorizontalAlignment="Left"
-                                             VerticalAlignment="Top">
+                                             VerticalAlignment="Top"
+                                             Margin="0,100,0,0">
                                 <TextBlock Text="{Binding FoodInformation.Name}"/>
                             </HyperlinkButton>
                             <TextBlock Text="{Binding FoodInformation.FoodElements}"
