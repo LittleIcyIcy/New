@@ -100,7 +100,8 @@ namespace FoodLibrary.ViewModels
                     List<int> reasonList = new List<int>(_reasonList);
                     _recommendationService.ChangeWeight(_foodName, reasonList, true);
                     _navigationService.NavigateTo("今日推荐",null);
-                    foreach (int i in _reasonList) _reasonList[i] = 0;
+                    for (int i = 0; i < 6; i++)
+                        _reasonList[i] = 0;
                 }));
 
         /// <summary>

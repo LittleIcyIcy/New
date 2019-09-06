@@ -31,5 +31,30 @@ namespace ChooseFood.Views
         private void DislikePage_OnLoaded(object sender, RoutedEventArgs e) {
             ((DislikePageViewModel)DataContext).ReceiveFoodNameCommand.Execute(null);
         }
+
+        private void One_Checked(object sender, RoutedEventArgs e)
+        {
+            ((DislikePageViewModel)DataContext).FirstCheckCommand.Execute(null);
+        }
+
+        private void Two_Checked(object sender, RoutedEventArgs e)
+        {
+            ((DislikePageViewModel)DataContext).SecondCheckCommand.Execute(null);
+        }
+
+        private void Three_Checked(object sender, RoutedEventArgs e)
+        {
+            ((DislikePageViewModel)DataContext).ThirdCheckCommand.Execute(null);
+        }
+
+        private void Four_Checked(object sender, RoutedEventArgs e)
+        {
+            ((DislikePageViewModel)DataContext).ForthCheckCommand.Execute(null);
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ((DislikePageViewModel)DataContext).FifthCheckCommand.Execute(null);
+        }
     }
 }
