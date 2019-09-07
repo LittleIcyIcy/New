@@ -227,9 +227,11 @@ namespace Tests
                 Log log = new Log();
                 log.FoodName = i.ToString();
                 log.Date = DateTime.Now;
+                int[] w = { 1, 1 };
+                log.WeatherList = new List<int>(w);
                 cloudLog.Add(log);
             }
-            List<Log> logs = new MaintenanceService(null, null, null, null, null, null,null).DeleteRecord(cloudLog, "1", DateTime.MinValue);
+            List<Log> logs = new MaintenanceService(null, null, null, null, null, null,null).DeleteRecord(cloudLog, "1", DateTime.MinValue,4);
             Assert.AreEqual(logs.Count, 9);
         }
         //测试维护系统添加操作1
@@ -243,13 +245,15 @@ namespace Tests
                 Log log = new Log();
                 log.FoodName = i.ToString();
                 log.Date = DateTime.Now;
+                int[] w = { 1, 1 };
                 cloudLog.Add(log);
+                log.WeatherList = new List<int>(w);
                 Log log1 = new Log();
                 log.FoodName = "1";
                 log.Date = DateTime.Now;
                 localLog.Add(log);
             }
-            List<Log> logs = new MaintenanceService(null, null, null, null, null, null, null).InsertRecord(cloudLog, localLog, "1", DateTime.MinValue);
+            List<Log> logs = new MaintenanceService(null, null, null, null, null, null, null).InsertRecord(cloudLog, localLog, "1", DateTime.MinValue,4);
             Assert.AreEqual(logs.Count, 20);
         }
         //测试维护系统添加操作2
@@ -269,7 +273,7 @@ namespace Tests
                 log.Date = DateTime.Now;
                 localLog.Add(log);
             }
-            List<Log> logs = new MaintenanceService(null, null, null, null, null, null, null).InsertRecord(cloudLog, localLog, "1", DateTime.MaxValue);
+            List<Log> logs = new MaintenanceService(null, null, null, null, null, null, null).InsertRecord(cloudLog, localLog, "1", DateTime.MaxValue,4);
             Assert.AreEqual(logs.Count, 10);
         }
         //测试维护系统同步操作

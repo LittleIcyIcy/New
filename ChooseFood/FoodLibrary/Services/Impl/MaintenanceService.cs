@@ -96,11 +96,15 @@ namespace FoodLibrary.Services.Impl
                             {
                                 if (flag == 0)
                                 {
-                                    cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime);
-                                    cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                                    cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime,j);
+                                    cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime,j);
                                     flag = 1;
+                                    for(int m =0;m < 6; m++)
+                                    {
+                                        tmpWeightChangeList[m] = tmpWeightChangeList[m] - cloudChangeInfList.Weight[j][m] + localChangeInfList.Weight[j][m];
+                                    }
                                 }
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] - cloudChangeInfList.Weight[j][k] + localChangeInfList.Weight[j][k];
+                                
                             }
                         }
 
@@ -115,21 +119,27 @@ namespace FoodLibrary.Services.Impl
                             {
                                 if (flag == 0)
                                 {
-                                    cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime);
-                                    cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                                    cloudLog = DeleteRecord(cloudLog, FoodName, lastCommitTime,j);
+                                    cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime,j);
                                     flag = 1;
+                                    for (int m = 0; m < 6; m++)
+                                    {
+                                        tmpWeightChangeList[m] = tmpWeightChangeList[m] - cloudChangeInfList.Weight[j][m] + localChangeInfList.Weight[j][m];
+                                    }
                                 }
-                                tmpWeightChangeList[k] = tmpWeightChangeList[k] -cloudChangeInfList.Weight[j][k]+ localChangeInfList.Weight[j][k] ;
                             }
                         }
                         else
                         {
                             if (flag == 0)
                             {
-                                cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime);
+                                cloudLog = InsertRecord(cloudLog, localLog, FoodName, lastCommitTime,j);
                                 flag = 1;
+                                for (int m = 0; m < 6; m++)
+                                {
+                                    tmpWeightChangeList[m] = tmpWeightChangeList[m]+ localChangeInfList.Weight[j][m];
+                                }
                             }
-                            tmpWeightChangeList[k] = tmpWeightChangeList[k] + localChangeInfList.Weight[j][k];
                         }
                     }
                 }
@@ -144,12 +154,12 @@ namespace FoodLibrary.Services.Impl
         }
 
 
-        public List<Log> InsertRecord(List<Log> cloudLog, List<Log> localLog, string foodName, DateTime lastCommitTime)
+        public List<Log> InsertRecord(List<Log> cloudLog, List<Log> localLog, string foodName, DateTime lastCommitTime,int j)
         {
             int i = 0;
             while (i < localLog.Count)
             {
-                if (localLog[i].FoodName == foodName && lastCommitTime < localLog[i].Date)
+                if (localLog[i].FoodName == foodName && lastCommitTime < localLog[i].Date && j == localLog[i].WeatherList[0] * 3 + localLog[i].WeatherList[1])
                 {
                     cloudLog.Add(localLog[i]);
                 }
@@ -161,12 +171,12 @@ namespace FoodLibrary.Services.Impl
             return cloudLog;
         }
 
-        public List<Log> DeleteRecord(List<Log> cloudLog, string foodName, DateTime lastCommitTime)
+        public List<Log> DeleteRecord(List<Log> cloudLog, string foodName, DateTime lastCommitTime,int j)
         {
             int i = 0;
             while (i < cloudLog.Count)
             {
-                if (cloudLog[i].Date > lastCommitTime && cloudLog[i].FoodName == foodName)
+                if (cloudLog[i].Date > lastCommitTime && cloudLog[i].FoodName == foodName && j == cloudLog[i].WeatherList[0]*3+ cloudLog[i].WeatherList[1])
                 {
                     cloudLog.RemoveAt(i);
                 }
