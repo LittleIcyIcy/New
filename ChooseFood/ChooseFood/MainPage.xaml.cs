@@ -45,7 +45,7 @@ namespace ChooseFood
             int m = ((MainPageViewModel)DataContext).JudgeState();
             if (m == 0)
             {
-                PopupNotice popupNotice = new PopupNotice("正在加载天气等信息，请稍等呢，亲！");
+                PopupNotice popupNotice = new PopupNotice("正在加载天气等信息，请稍等呢，亲！",3000);
                 popupNotice.ShowAPopup();
             }
             ((MainPageViewModel)DataContext).ToFirstCommand.Execute(null);

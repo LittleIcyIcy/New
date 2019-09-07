@@ -13,18 +13,17 @@ namespace FoodLibrary.ViewModels
 
         private IRecommendationService _recommendationService;
 
+        private ILogService _logService;
+
+        private IFoodFavorService _foodFavorService;
+
         public LikePageViewModel(INavigationService navigationService,
-            IRecommendationService recommendationService) {
+            IRecommendationService recommendationService,
+            ILogService logService,IFoodFavorService foodFavorService) {
             _navigationService = navigationService;
             _recommendationService = recommendationService;
-        }
-
-        private List<string> _flagList = new List<string> { "False", "true", "true", "true", "true" };
-
-        public List<string> FlagList
-        {
-            get => _flagList;
-            set => Set(nameof(FlagList),ref _flagList, value);
+            _logService = logService;
+            _foodFavorService = foodFavorService;
         }
 
         private string _foodName;
@@ -82,8 +81,6 @@ namespace FoodLibrary.ViewModels
             _fifthCheckCommand ?? (_fifthCheckCommand =
                 new RelayCommand(() =>
                 {
-                    for (int i = 0; i < 4; i++)
-                        _flagList[i] = "false";
                     for (int i = 0; i < 6; i++)
                         _reasonList[i] = 1;
                 }));
@@ -100,6 +97,8 @@ namespace FoodLibrary.ViewModels
                     List<int> reasonList = new List<int>(_reasonList);
                     _recommendationService.ChangeWeight(_foodName, reasonList, true);
                     _navigationService.NavigateTo("今日推荐",null);
+                    _logService.SaveLogAsync();
+                    _foodFavorService.SaveChangeWeightAsync();
                     for (int i = 0; i < 6; i++)
                         _reasonList[i] = 0;
                 }));
@@ -112,7 +111,8 @@ namespace FoodLibrary.ViewModels
             _backCommand ?? (_backCommand =
                 new RelayCommand(() =>
                 {
-                    foreach (int i in _reasonList) _reasonList[i] = 0;
+                    for (int i = 0; i < 6; i++)
+                        _reasonList[i] = 0;
                     _navigationService.NavigateTo("今日推荐", null);
                 }));
 

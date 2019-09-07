@@ -29,6 +29,8 @@ namespace ChooseFood.Views
         //创建一个popup对象
         private Popup _popup = null;
 
+        private int _lastTime;
+
         public PopupNotice()
         {
             this.InitializeComponent();
@@ -49,9 +51,10 @@ namespace ChooseFood.Views
         /// 重载
         /// </summary>
         /// <param name="popupContentString">弹出框中的内容</param>
-        public PopupNotice(string popopString) : this()
+        public PopupNotice(string popopString,int lastTime) : this()
         {
             _popupContent = popopString;
+            _lastTime = lastTime;
         }
 
         /// <summary>
@@ -87,7 +90,7 @@ namespace ChooseFood.Views
         public async void PopupInCompleted(object sender, object e)
         {
             //在原地续2秒
-            await Task.Delay(2000);
+            await Task.Delay(_lastTime);
 
             //将消失动画打开
             this.PopupOut.Begin();

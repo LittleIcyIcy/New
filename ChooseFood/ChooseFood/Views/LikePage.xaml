@@ -34,12 +34,10 @@
                           FontSize="20"
                           Margin="200,0,0,0"
                           VerticalAlignment="Top"
-                          Checked="One_Checked"
-                          IsChecked="{Binding FlagList[0]}"/>
+                          Checked="One_Checked"/>
             <RadioButton  x:Name="two"
                           Content="还是今天太热啦，这道菜让您觉得清热解暑呢？"
                           FontSize="20"
-                          IsEnabled="{Binding FlagList[1]}"
                           VerticalAlignment="Center"
                           Margin="200,70,0,0"
                           Checked="Two_Checked"/>
@@ -48,13 +46,11 @@
             <RadioButton  x:Name="three"
                           Content="今天空气湿度刚刚好，这道菜让您觉得很舒适？"
                           FontSize="20"
-                          IsEnabled="{Binding FlagList[2]}"
                           Margin="200,40,0,0"
                           Checked="Three_Checked"/>
             <RadioButton  x:Name="four"
                           Content="还是今天太干了，这道菜让您觉得很舒适呢？"
                           FontSize="20"
-                          IsEnabled="{Binding FlagList[3]}"
                           VerticalAlignment="Center"
                           Margin="200,70,0,0"
                           Checked="Four_Checked"/>
