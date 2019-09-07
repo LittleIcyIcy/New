@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding DislikePageViewModel, Source={StaticResource ViewModelLocator}}"
     Loaded="DislikePage_OnLoaded">
 
@@ -22,7 +21,11 @@
                 Content="&#xE0D5;"
                 FontSize="25"
                 Margin="30,-10,0,0"
-                Command="{Binding BackCommand}"/>
+                Command="{Binding BackCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+        </Button>
         <TextBlock Grid.Row="0"
                    Text="请问您为什么不喜欢这道菜呢？"
                    HorizontalAlignment="Center"
@@ -69,7 +72,10 @@
                 Content="&#xE001;"
                 FontSize="50"
                 Margin="0,0,150,0"
-                Background="White"
-                Command="{Binding ConfirmCommand}"/>
+                Command="{Binding ConfirmCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

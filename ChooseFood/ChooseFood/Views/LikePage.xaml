@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding LikePageViewModel, Source={StaticResource ViewModelLocator}}"
     Loaded="LikePage_OnLoaded">
 
@@ -22,7 +21,11 @@
                 Content="&#xE0D5;"
                 FontSize="25"
                 Margin="30,-10,0,0"
-                Command="{Binding BackCommand}"/>
+                Command="{Binding BackCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+        </Button>
         <TextBlock Text="请问您为什么喜欢这道菜呢？"
                    Grid.Row="0"
                    Margin="300,0,0,0"
@@ -61,7 +64,6 @@
                      Margin="200,0,0,0"
                      Checked="RadioButton_Checked"/>
         <Button Grid.Row="3"
-                Background="White"
                 FontFamily="Segoe MDL2 Assets"
                 Content="&#xE001;"
                 FontSize="40"
@@ -71,6 +73,10 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Margin="0,0,150,0"
-                Command="{Binding ConfirmCommand}"/>
+                Command="{Binding ConfirmCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

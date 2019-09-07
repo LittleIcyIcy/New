@@ -133,9 +133,6 @@
     <Compile Include="Views\DislikePage.xaml.cs">
       <DependentUpon>DislikePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FirstPage.xaml.cs">
-      <DependentUpon>FirstPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ImagePage.xaml.cs">
       <DependentUpon>ImagePage.xaml</DependentUpon>
     </Compile>
@@ -501,10 +498,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DislikePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FirstPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -38,7 +38,6 @@ namespace ChooseFood.Services.Impl
                 ("预览菜单", typeof(MenuPage3)),
                 ("设置", typeof(MenuPage4)),
                 ("LikePage",  typeof(LikePage)),
-                ("FirstPage",typeof(FirstPage)),
                 ("ImagePage",typeof(ImagePage)),
                 ("DislikePage",typeof(DislikePage)),
                 ("LoginPromptPage",typeof(LoginPromptPage))

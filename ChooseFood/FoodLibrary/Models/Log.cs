@@ -13,6 +13,7 @@ namespace FoodLibrary.Models
         public List<int> WeatherList { get; set; }
 
         public DateTime Date { get; set; }
+        public List<string> WeatherInformationList { get; set; }
 
         public int GetFavor()
         {
